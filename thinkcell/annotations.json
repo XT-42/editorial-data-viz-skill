@@ -1,0 +1,270 @@
+{
+  "version": "1.2.0",
+  "note": "标签、箭头、数据表、时间轴状态是图形功能或增强组件，不应计入菜单图表数",
+  "count": 19,
+  "features": [
+    {
+      "id": "difference-arrows",
+      "name_zh": "差异箭头",
+      "description": "对任意两个数据端点标出绝对差/百分比差",
+      "fields": [
+        "pointA",
+        "pointB",
+        "mode"
+      ],
+      "rule": "diff=B-A; pct=(B-A)/abs(A)，A=0时不显示百分比",
+      "source_url": "https://www.think-cell.com/en/resources/manual/chartdecorations",
+      "web_implementation": "原创 SVG mark + annotations layer",
+      "is_chart_type": false
+    },
+    {
+      "id": "cagr-arrows",
+      "name_zh": "CAGR 复合增长箭头",
+      "description": "起止期间计算复合增长并连接时间点",
+      "fields": [
+        "start",
+        "end",
+        "elapsed_years"
+      ],
+      "rule": "CAGR=(end/start)^(1/years)-1；值必须满足数学定义",
+      "source_url": "https://www.think-cell.com/en/resources/manual/chartdecorations",
+      "web_implementation": "原创 SVG mark + annotations layer",
+      "is_chart_type": false
+    },
+    {
+      "id": "series-cagr-labels",
+      "name_zh": "系列 CAGR 标签",
+      "description": "同一系列各自增长率",
+      "fields": [
+        "series",
+        "start",
+        "end",
+        "years"
+      ],
+      "rule": "仅对连续正值区间计算；零/负需说明不可算",
+      "source_url": "https://www.think-cell.com/en/resources/manual/chartdecorations",
+      "web_implementation": "原创 SVG mark + annotations layer",
+      "is_chart_type": false
+    },
+    {
+      "id": "value-lines",
+      "name_zh": "水平/垂直数值线",
+      "description": "显示目标、均值、中位和阈值",
+      "fields": [
+        "axis",
+        "value",
+        "label"
+      ],
+      "rule": "目标线与统计中心线应区分",
+      "source_url": "https://www.think-cell.com/en/resources/manual/chartdecorations",
+      "web_implementation": "原创 SVG mark + annotations layer",
+      "is_chart_type": false
+    },
+    {
+      "id": "percentage-indicators",
+      "name_zh": "100% 指示器",
+      "description": "说明堆积百分比图的总体尺度",
+      "fields": [
+        "sum",
+        "denominator"
+      ],
+      "rule": "明确分母非空与总量",
+      "source_url": "https://www.think-cell.com/en/resources/manual/chartdecorations",
+      "web_implementation": "原创 SVG mark + annotations layer",
+      "is_chart_type": false
+    },
+    {
+      "id": "series-connectors",
+      "name_zh": "系列连接线",
+      "description": "相邻类别同系列视觉跟踪",
+      "fields": [
+        "category",
+        "series",
+        "value"
+      ],
+      "rule": "连接只表示趋势/延续，非流量",
+      "source_url": "https://www.think-cell.com/en/resources/manual/chartdecorations",
+      "web_implementation": "原创 SVG mark + annotations layer",
+      "is_chart_type": false
+    },
+    {
+      "id": "universal-connectors",
+      "name_zh": "通用连接线",
+      "description": "视觉连接任意独立图表元素",
+      "fields": [
+        "source",
+        "target"
+      ],
+      "rule": "仅视觉标记，不参与瀑布图数据计算",
+      "source_url": "https://www.think-cell.com/en/resources/manual/chartdecorations",
+      "web_implementation": "原创 SVG mark + annotations layer",
+      "is_chart_type": false
+    },
+    {
+      "id": "axis-breaks",
+      "name_zh": "坐标轴断裂",
+      "description": "压缩数值断点以节省空间",
+      "fields": [
+        "domain",
+        "breakStart",
+        "breakEnd"
+      ],
+      "rule": "须显著断裂标识，优先避免有误导的断轴",
+      "source_url": "https://www.think-cell.com/en/resources/manual/axes",
+      "web_implementation": "原创 SVG mark + annotations layer",
+      "is_chart_type": false
+    },
+    {
+      "id": "secondary-axis",
+      "name_zh": "辅助数值轴",
+      "description": "比较不同量纲系列",
+      "fields": [
+        "leftSeries",
+        "rightSeries"
+      ],
+      "rule": "不得通过任意尺度制造虚假相关",
+      "source_url": "https://www.think-cell.com/en/resources/manual/axes",
+      "web_implementation": "原创 SVG mark + annotations layer",
+      "is_chart_type": false
+    },
+    {
+      "id": "automatic-labels",
+      "name_zh": "自动标签避让",
+      "description": "减少重叠并保留必要标签",
+      "fields": [
+        "marks",
+        "viewport",
+        "priority"
+      ],
+      "rule": "不能默默丢失业务关键值",
+      "source_url": "https://www.think-cell.com/en/resources/manual/textlabels",
+      "web_implementation": "原创 SVG mark + annotations layer",
+      "is_chart_type": false
+    },
+    {
+      "id": "grand-totals",
+      "name_zh": "总计与小计标注",
+      "description": "强调分类总和、业务层级合计",
+      "fields": [
+        "category",
+        "total",
+        "subtotal"
+      ],
+      "rule": "与可视段求和口径一致",
+      "source_url": "https://www.think-cell.com/en/resources/manual/textlabels",
+      "web_implementation": "原创 SVG mark + annotations layer",
+      "is_chart_type": false
+    },
+    {
+      "id": "data-linked-tables",
+      "name_zh": "图表绑定明细表",
+      "description": "同源数据同时呈现在图表与表格",
+      "fields": [
+        "dataset",
+        "columns",
+        "metrics"
+      ],
+      "rule": "图表与表格同筛选、同更新时间",
+      "source_url": "https://www.think-cell.com/en/resources/manual/charts-with-data-tables",
+      "web_implementation": "原创 SVG mark + annotations layer",
+      "is_chart_type": false
+    },
+    {
+      "id": "error-bars",
+      "name_zh": "误差线",
+      "description": "表示不确定度或区间范围",
+      "fields": [
+        "estimate",
+        "lower",
+        "upper"
+      ],
+      "rule": "区分置信/预测/标准差",
+      "source_url": "https://www.think-cell.com/en/resources/manual/column-line-area-charts",
+      "web_implementation": "原创 SVG mark + annotations layer",
+      "is_chart_type": false
+    },
+    {
+      "id": "trendlines",
+      "name_zh": "回归趋势线",
+      "description": "按照拟合类型表示数据关系",
+      "fields": [
+        "x",
+        "y",
+        "model",
+        "weights"
+      ],
+      "rule": "拟合算法与适用尺度需标注",
+      "source_url": "https://www.think-cell.com/en/resources/manual/scatterbubble",
+      "web_implementation": "原创 SVG mark + annotations layer",
+      "is_chart_type": false
+    },
+    {
+      "id": "partitions",
+      "name_zh": "分区/象限线",
+      "description": "分出重点业务区域和不同情景",
+      "fields": [
+        "x_cut",
+        "y_cut",
+        "fill"
+      ],
+      "rule": "阈值真实且一目了然",
+      "source_url": "https://www.think-cell.com/en/resources/manual/scatterbubble",
+      "web_implementation": "原创 SVG mark + annotations layer",
+      "is_chart_type": false
+    },
+    {
+      "id": "net-lines",
+      "name_zh": "净线/预算参考系列",
+      "description": "将系列转换成参考线或基线",
+      "fields": [
+        "category",
+        "value",
+        "benchmark"
+      ],
+      "rule": "基准系列不得重复堆叠",
+      "source_url": "https://www.think-cell.com/en/resources/manual/format-and-style-charts",
+      "web_implementation": "原创 SVG mark + annotations layer",
+      "is_chart_type": false
+    },
+    {
+      "id": "bubble-size-legend",
+      "name_zh": "气泡尺寸图例",
+      "description": "解释气泡面积对应数量",
+      "fields": [
+        "size",
+        "unit"
+      ],
+      "rule": "面积与数值成比例",
+      "source_url": "https://www.think-cell.com/en/resources/manual/scatterbubble",
+      "web_implementation": "原创 SVG mark + annotations layer",
+      "is_chart_type": false
+    },
+    {
+      "id": "gantt-activities",
+      "name_zh": "甘特活动条",
+      "description": "项目持续时间范围",
+      "fields": [
+        "start",
+        "end",
+        "task"
+      ],
+      "rule": "需有时间轴与有效日期",
+      "source_url": "https://www.think-cell.com/en/resources/manual/gantt",
+      "web_implementation": "原创 SVG mark + annotations layer",
+      "is_chart_type": false
+    },
+    {
+      "id": "gantt-milestones",
+      "name_zh": "甘特里程碑",
+      "description": "按日期绘制菱形里程碑",
+      "fields": [
+        "task",
+        "date"
+      ],
+      "rule": "里程碑不是任务持续时长",
+      "source_url": "https://www.think-cell.com/en/resources/manual/gantt",
+      "web_implementation": "原创 SVG mark + annotations layer",
+      "is_chart_type": false
+    }
+  ]
+}

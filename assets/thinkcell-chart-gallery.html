@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>商业图表视觉系统 · Think-cell 方法论网页适配</title>
+<style>
+:root{--bg:#f6f5f0;--paper:#fff;--text:#19292a;--muted:#657272;--border:#dee4e1;--accent:#176e70;--secondary:#bc704e;--soft:#e4f0ec}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.65 system-ui,"PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:1440px;margin:0 auto;padding:28px 28px 75px}
+.headline{border-top:3px solid var(--text);padding-top:19px}h1{font-size:clamp(32px,4.5vw,61px);line-height:1.12;letter-spacing:-.04em;max-width:940px;margin:27px 0 12px}
+.lede{max-width:850px;color:var(--muted);font-size:16px}h2{font-size:25px;margin:0}
+.tag{font:600 11px ui-monospace,monospace;letter-spacing:.13em;color:var(--accent)}
+.ribbon{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:27px 0}.metric{border-top:1px solid var(--border);padding:14px 0}.metric b{display:block;font-size:27px;line-height:1.3}
+.notice{border-left:3px solid var(--accent);background:var(--soft);padding:12px 16px;color:var(--text)}
+.controls{margin:26px 0 15px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+input,select,button{border:1px solid var(--border);border-radius:4px;padding:9px 12px;background:#fff;color:var(--text);font:inherit}
+input{flex:1;min-width:180px;max-width:350px}button{cursor:pointer}button:hover{border-color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.card{background:var(--paper);border:1px solid var(--border);padding:16px;display:flex;flex-direction:column;min-width:0}
+.cardhead{display:flex;justify-content:space-between;gap:12px;align-items:center}.card h3{font-size:18px;line-height:1.3;margin:10px 0 2px}
+.card p{color:var(--muted);font-size:12px;margin:3px 0 7px;min-height:36px}
+.card svg{width:100%;height:auto;display:block;margin:auto 0 10px}
+.card footer{border-top:1px solid var(--border);padding-top:12px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.card code{font:11px ui-monospace,monospace;color:var(--muted);white-space:normal;overflow-wrap:anywhere}
+.info{font-size:12px;color:var(--accent);background:var(--soft);border:0}
+.detail{margin-top:36px;border-top:2px solid var(--text);padding:27px 0;display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.detail dl{display:grid;grid-template-columns:110px 1fr;gap:12px;margin:20px 0}.detail dt{color:var(--muted)}.detail dd{margin:0}
+table{border-collapse:collapse;width:100%}td,th{padding:9px 7px;border-bottom:1px solid var(--border);text-align:left}
+footer.site{border-top:1px solid var(--border);margin-top:48px;padding-top:20px;color:var(--muted)}
+@media(max-width:1100px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){main{padding:15px 16px 45px}.grid,.ribbon,.detail{grid-template-columns:1fr}.card p{min-height:0}}
+</style></head>
+<body><main><header class="headline"><div class="tag">BUSINESS CHART SYSTEM / V1.2.0</div>
+<h1>让商业图表，<span style="color:var(--accent)">自己说清楚变化。</span></h1>
+<p class="lede">以 think-cell 官方图表家族为参考的<strong>原创网页端</strong> SVG 图形画廊：完整覆盖核验的 16 个图形入口，衔接 48 种应用配方和 19 种自动标注能力。</p>
+<div class="ribbon"><div class="metric"><b>16</b>菜单图型入口</div><div class="metric"><b>48</b>变体/应用配方</div><div class="metric"><b>19</b>增强注释与表格能力</div></div>
+<div class="notice"><b>范围说明：</b>这是非官方中文教学与网页开发适配方案。所有 SVG 示例为独立原创、模拟数据，不代表 think-cell 产品界面截图或原生运行效果。产品官方宣传“40+ types”不等于菜单里有 40+ 个独立图标。</div>
+</header>
+<section aria-label="筛选和图表选择"><div class="controls">
+<input id="q" aria-label="搜索图表" placeholder="搜索：瀑布 / Mekko / 甘特 / 业务用途">
+<select id="f" aria-label="图表分类"><option value="">全部图形</option><option value="composition">结构</option><option value="comparison">对比</option><option value="decomposition">分解</option><option value="trend">趋势</option><option value="distribution">分布</option><option value="timeline">时间线</option></select>
+<select id="theme" aria-label="视觉主题"><option value="teal">编辑式墨绿</option><option value="brick">陶土专业</option></select>
+<button id="reset" type="button">重置</button>
+<span id="count" role="status">16 / 16</span>
+</div></section>
+<section id="gallery" class="grid" aria-label="think-cell 图形启发的原创 SVG 示例"></section>
+<section id="details" class="detail" tabindex="-1"><div><div class="tag">DATA / CODE / DESIGN</div><h2 id="detail-title">选择图形查看更多</h2><p id="detail-question">点击任何图形的“设计与口径”查看对应的网页数据契约和风险。</p><dl id="metadata"></dl></div><div><div class="tag">FIELDS & RULES</div><h2>图形编码</h2><table><thead><tr><th>字段</th><th>角色</th></tr></thead><tbody id="datafields"></tbody></table><p>完整 48 种变体见仓库 <code>thinkcell/catalog.json</code>，自动注释机制见 <code>thinkcell/annotations.json</code>。</p></div></section>
+<footer class="site">Editorial Data Viz Skill v1.2 · 非官方网页适配 · 模拟数据演示 · 无外部依赖 · 不复用第三方商标及专有资产。</footer>
+</main>
+<script>
+(function(){
+"use strict";
+const menu=[
+["stacked-column-bar","堆积柱形/条形","composition","比较总体与构成","category,series,value","相同量纲可加；负数须单独说明"],
+["stacked-100-column-bar","100%堆积柱形/条形","composition","比较不同分组构成比例","category,series,value","分母不可省略；不体现总体量"],
+["clustered-column-bar","簇状柱形/条形","comparison","并列比较各渠道同指标","category,series,value","零基线、控制系列数量"],
+["waterfall-build-up","上行瀑布图","decomposition","销售变化由什么构成？","step,delta,total_flag","加总必须守恒"],
+["waterfall-build-down","下行瀑布图","decomposition","收入扣除成本后怎样变化？","step,delta,total_flag","小计不能重复计入"],
+["mekko-unit","单位轴 Mekko","composition","分别编码列宽和绝对段高","category,series,value,x_extent","X extent 与 Y 值独立，不等同百分比Mekko"],
+["mekko-percent","百分比轴 Mekko","composition","同时比较类别规模与构成","category,series,value","面积=全局总量份额"],
+["stacked-area","堆积面积图","trend","多系列总量如何随时间变化？","date,series,value","中间层不易直接比较"],
+["stacked-100-area","100%堆积面积图","trend","结构比例如何随时间变化？","date,series,value","绝对规模需另附"],
+["line-profile","折线/轮廓图","trend","变化趋势和拐点在哪里？","date,series,value","缺失不自动补0"],
+["combination","柱线组合图","comparison","规模与增幅如何同步变化？","date,value,rate","双轴不应制造相关性"],
+["pie","饼图","composition","少量类别如何构成100%？","category,share","扇区数过多应换条形图"],
+["doughnut","圆环图","composition","核心份额有多大？","category,share","中心数字不代表独立数据"],
+["scatter","散点图","distribution","两个指标存在什么关系？","x,y,group","相关不代表因果"],
+["bubble","气泡图","distribution","加入规模后二维关系如何变化？","x,y,size,group","面积而非半径与 size 成比例"],
+["gantt","甘特/项目时间线","timeline","计划活动何时开始结束？","task,start,end,milestone","时间轴必须按真实日期映射"]
+];
+const $=id=>document.getElementById(id);let palette="teal";
+const color=()=>palette==="teal"?["#176e70","#bc704e","#8baea1","#d5e5df","#253f43"]:["#9d553d","#5f7d91","#ddb18e","#f1ded2","#303c44"];
+function text(x,y,s,sz=11,col="#586768",anchor="start"){return '<text x="'+x+'" y="'+y+'" text-anchor="'+anchor+'" font-family="system-ui" font-size="'+sz+'" fill="'+col+'">'+escape(s)+'</text>'}
+function escape(s){return String(s).replace(/[&<>"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]))}
+function box(x,y,w,h,c){return '<rect x="'+x+'" y="'+y+'" width="'+Math.max(0,w)+'" height="'+Math.max(0,h)+'" fill="'+c+'"/>'}
+function line(x1,y1,x2,y2,c,w=1,dash=""){return '<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="'+c+'" stroke-width="'+w+'" stroke-dasharray="'+dash+'"/>'}
+function dot(x,y,r,c,tip=""){return '<circle cx="'+x+'" cy="'+y+'" r="'+r+'" fill="'+c+'">'+(tip?'<title>'+escape(tip)+'</title>':'')+'</circle>'}
+function poly(pts,c,w=2,fill="none"){return '<path d="'+pts.map((p,i)=>(i?'L':'M')+p.join(',')).join(' ')+'" stroke="'+c+'" stroke-width="'+w+'" fill="'+fill+'" stroke-linejoin="round" stroke-linecap="round"/>'}
+function axis(){return line(35,220,472,220,"#d9e1dd",1.5)}
+function svg(label,body){return '<svg viewBox="0 0 500 256" role="img" aria-label="'+escape(label)+'：模拟数据">'+
+'<title>'+escape(label+'：模拟数据')+'</title>'+body+'</svg>'}
+function labels(xs,arr,y=242){return xs.map((x,i)=>text(x,y,arr[i],11,"#657272","middle")).join('')}
+function stacked(percent=false){let cs=color(),rows=[[26,42,24],[38,23,26],[36,44,18],[44,18,34]],s=axis(),x=[65,170,275,380];
+rows.forEach((r,j)=>{let unit=percent?155/r.reduce((a,b)=>a+b,0):1.3,base=220;r.forEach((v,k)=>{let h=v*unit;base-=h;s+=box(x[j],base,63,h,cs[k])});s+=text(x[j]+31,Math.max(21,base-7),percent?'100%':r.reduce((a,b)=>a+b,0),11,cs[4],"middle")});
+return svg(percent?'100%堆积柱形图':'堆积柱形图',s+labels(x.map(v=>v+31),['A','B','C','D']))}
+function clustered(){let cs=color(),s=axis(),groups=[[60,95],[88,75],[113,93],[96,124]];groups.forEach((v,i)=>{v.forEach((a,j)=>{let x=55+i*103+j*34,h=a*1.35;s+=box(x,220-h,30,h,cs[j])});s+=text(88+i*103,241,'组'+(i+1),11,cs[4],'middle')});return svg('簇状柱形图',s)}
+function waterfall(up){let cs=color(),labels0=up?['基期','增量','价格','新品','损耗','期末']:['收入','采购','运输','费用','其他','利润'],delta=up?[180,42,-16,25,-13,218]:[220,-54,-32,-28,14,120],running=delta[0],s=axis();
+delta.forEach((v,i)=>{let y1,y2,fill=cs[4];if(i===0||i===5){y1=220-v*.76;y2=220}else{let old=running;running+=v;y1=220-Math.max(old,running)*.76;y2=220-Math.min(old,running)*.76;fill=v<0?cs[1]:cs[0]}let x=33+i*77;s+=box(x,y1,52,y2-y1,fill)+text(x+26,Math.max(13,y1-7),(i===0||i===5?'':v>0?'+':'')+v,11,cs[4],'middle')+text(x+26,242,labels0[i],10,"#657272",'middle')});
+return svg(up?'上行瀑布图':'下行瀑布图',s)}
+function mekko(percent){let cs=color(),vals=[[35,40,25],[20,35,15],[45,15,25],[30,25,40]],widths=percent?vals.map(x=>x.reduce((a,b)=>a+b,0)):[72,115,58,95],sum=widths.reduce((a,b)=>a+b,0),s=axis(),x=35;
+vals.forEach((r,j)=>{let w=437*widths[j]/sum,unit=percent?160/r.reduce((a,b)=>a+b,0):1.25,base=220;
+r.forEach((v,i)=>{let h=v*unit;base-=h;s+=box(x+1,base,w-2,h,cs[i])});s+=text(x+w/2,240,["A","B","C","D"][j],11,cs[4],"middle");x+=w});
+return svg(percent?'百分比轴 Mekko':'单位轴 Mekko（独立列宽）',s)}
+function area(percent){let cs=color(),data=[[22,30,40,35,45,44],[31,28,30,36,35,41],[16,18,20,24,21,22]],x=i=>42+i*82,ys=220,high=percent?100:130;
+let s=axis(),prior=[0,0,0,0,0,0],sum=[0,1,2,3,4,5].map(i=>data.reduce((a,r)=>a+r[i],0));
+data.forEach((row,k)=>{let next=row.map((v,i)=>prior[i]+(percent?v/sum[i]*100:v));let top=next.map((v,i)=>[x(i),ys-v*1.44]),bottom=prior.map((v,i)=>[x(i),ys-v*1.44]).reverse();s+=poly([...top,...bottom,top[0]],cs[k],1,cs[k]);prior=next});return svg(percent?'100%堆积面积图':'堆积面积图',s+labels([42,124,206,288,370,452],['1','2','3','4','5','6']))}
+function linechart(){let cs=color(),s=axis(),values=[[50,61,54,78,88,108],[44,49,60,64,91,95]],x=i=>42+i*82;values.forEach((r,j)=>{let pts=r.map((v,i)=>[x(i),220-v*1.6]);s+=poly(pts,cs[j],3);pts.forEach(([a,b],i)=>s+=dot(a,b,3.2,cs[j],r[i]))});return svg('折线图与双系列',s+labels([42,124,206,288,370,452],['1月','2月','3月','4月','5月','6月']))}
+function combo(){let cs=color(),v=[58,76,67,101,96,124],rate=[5,11,8,14,17,19],s=axis(),p=[];v.forEach((a,i)=>{let x=46+i*72;s+=box(x,220-a*1.15,34,a*1.15,cs[2]);p.push([x+17,210-rate[i]*5.4])});s+=poly(p,cs[1],3);p.forEach((t,i)=>s+=dot(t[0],t[1],4,cs[1],rate[i]+'%'));return svg('柱线组合图',s)}
+function arc(cx,cy,R,r,start,end,fill){let p=a=>[cx+R*Math.cos(a),cy+R*Math.sin(a)],q=a=>[cx+r*Math.cos(a),cy+r*Math.sin(a)],a=p(start),b=p(end),c=q(end),d=q(start);let large=end-start>Math.PI?1:0;let path=r>0?'M'+a+' A'+R+','+R+' 0 '+large+' 1 '+b+' L'+c+' A'+r+','+r+' 0 '+large+' 0 '+d+'Z':'M'+cx+','+cy+' L'+a+' A'+R+','+R+' 0 '+large+' 1 '+b+'Z';return '<path d="'+path+'" fill="'+fill+'" stroke="#fff" stroke-width="2"/>'}
+function pie(donut){let cs=color(),values=[38,28,21,13],ang=-Math.PI/2,s='',cx=247,cy=120;values.forEach((v,i)=>{let end=ang+v/100*Math.PI*2;s+=arc(cx,cy,93,donut?52:0,ang,end,cs[i]);ang=end});s+=donut?text(cx,120,'100%',24,cs[4],'middle')+text(cx,140,'模拟结构',11,'#657272','middle'):'';return svg(donut?'圆环图':'饼图',s+values.map((v,i)=>box(62+i*100,238,10,10,cs[i])+text(75+i*100,247,v+'%',11)).join(''))}
+function scatter(bubble){let cs=color(),s=axis()+line(251,20,251,220,'#c6cecb',1,'3 4')+line(35,123,472,123,'#c6cecb',1,'3 4');for(let i=0;i<23;i++){let x=47+((i*61+i*i*13)%407),y=25+((i*37+i*i*7)%182),size=3+(i%5)*2;s+=dot(x,y,bubble?size:3.5,i%5===0?cs[1]:cs[0],"样本"+(i+1))}return svg(bubble?'气泡图':'散点与分区图',s+text(468,241,'X 轴',10,'#657272','end')+text(38,16,'Y 轴',10,'#657272'))}
+function gantt(){let cs=color(),rows=[['计划',10,70],['采购',55,138],['到货',120,173],['试卖',161,228]],s='',gx=111;for(let t=0;t<=5;t++){let x=gx+t*67;s+=line(x,26,x,221,'#dce5e0')+text(x+3,17,'第'+(t+1)+'周',10,'#657272')}
+rows.forEach((r,i)=>{let y=48+i*44;s+=text(81,y+14,r[0],12,cs[4],'end');s+=box(gx+r[1]*1.25,y,Math.max(10,(r[2]-r[1])*1.25),20,i%2?cs[2]:cs[0]);if(i===1||i===3){let x=gx+r[2]*1.25;s+='<path d="M'+x+','+(y-8)+' l8,8 -8,8 -8,-8 Z" fill="'+cs[1]+'"/>'}});return svg('甘特时间线与里程碑',s)}
+const DRAW={"stacked-column-bar":()=>stacked(false),"stacked-100-column-bar":()=>stacked(true),"clustered-column-bar":clustered,"waterfall-build-up":()=>waterfall(true),"waterfall-build-down":()=>waterfall(false),"mekko-unit":()=>mekko(false),"mekko-percent":()=>mekko(true),"stacked-area":()=>area(false),"stacked-100-area":()=>area(true),"line-profile":linechart,"combination":combo,"pie":()=>pie(false),"doughnut":()=>pie(true),"scatter":()=>scatter(false),"bubble":()=>scatter(true),"gantt":gantt};
+function draw(){let q=$('q').value.trim().toLowerCase(),f=$('f').value,items=menu.filter(x=>(!f||x[2]===f)&&(!q||x.join(' ').toLowerCase().includes(q)));
+$('count').textContent=items.length+' / 16';$('gallery').innerHTML=items.map((x)=>{let index=menu.indexOf(x)+1;return '<article class="card"><div class="cardhead"><span class="tag">'+String(index).padStart(2,'0')+' / 16</span><span class="tag">'+escape(x[2])+'</span></div><h3>'+escape(x[1])+'</h3><p>'+escape(x[3])+'</p>'+DRAW[x[0]]()+'<footer><code>'+escape(x[0])+'</code><button class="info" data-id="'+escape(x[0])+'">设计与口径</button></footer></article>'}).join('')||'<p>没有匹配项，请修改关键词。</p>';
+document.querySelectorAll('.info').forEach(b=>b.addEventListener('click',()=>inspect(b.dataset.id)))}
+function inspect(id){let x=menu.find(v=>v[0]===id);if(!x)return;$('detail-title').textContent=x[1];$('detail-question').textContent=x[3];
+let d=[['图形 ID',x[0]],['结构分类',x[2]],['统计风险',x[5]],['数据性质','全部为模拟示意；不能直接用作真实业务结论']];$('metadata').innerHTML=d.map(r=>'<dt>'+escape(r[0])+'</dt><dd>'+escape(r[1])+'</dd>').join('');
+$('datafields').innerHTML=x[4].split(',').map((n,i)=>'<tr><td>'+escape(n)+'</td><td>'+(i===0?'分组/时点':'数值/系列/编码')+'</td></tr>').join('');$('details').scrollIntoView({behavior:'smooth',block:'start'})}
+$('q').addEventListener('input',draw);$('f').addEventListener('change',draw);$('theme').addEventListener('change',e=>{palette=e.target.value;draw()});$('reset').addEventListener('click',()=>{$('q').value='';$('f').value='';$('theme').value='teal';palette='teal';draw()});draw();
+})();
+</script></body></html>

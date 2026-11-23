@@ -1,8 +1,26 @@
-# 中文编辑式数据可视化 Skill v1.1 · 专业图形系统 + 可扩展模板库
+# 中文编辑式数据可视化 Skill v1.2 · 商业咨询图形系统 + 可扩展模板库
 
 本 Skill 将 Google AI Studio “Interactive Data Dashboard” 所讨论的四个理念——**SVG 图形、实时筛选、滚动叙事、可访问的数据表**——转化为可执行的中文前端设计工作流。
 
 > 重要：T001 是根据**本次对话中提炼的设计理念**建立的原创风格方案，**未验证原网页截图、源码或精确图表种类**。所给颜色、字体、布局是本 Skill 的推荐方案，不代表 Google 官方原始配置。
+
+## v1.2 新增：think-cell 专业商业图形方法论
+
+官网宣传 think-cell 具有 40 多种图表类型，但具体菜单与变体的计数方式不同。经对照官方手册，本仓库将其拆成**16 个菜单图形入口**、**48 个有来源的变体/应用配方**与**19 种非图表增强功能**。以此解决此前 Skill 无法制作专业 Mekko、桥接瀑布、组合图、甘特、CAGR/差异箭头等问题。
+
+- [thinkcell/catalog.json](thinkcell/catalog.json) — 16+48 结构化图形规范：源页面、字段、编码、统计风险。
+- [thinkcell/annotations.json](thinkcell/annotations.json) — 19 种增强功能：差异/CAGR 箭头、数值线、标签、数据联动表、甘特等。
+- [assets/thinkcell-chart-gallery.html](assets/thinkcell-chart-gallery.html) — **16 幅原创可运行 SVG 示例**，均为模拟数据。
+- [thinkcell/README.md](thinkcell/README.md) — 调用与计数说明。
+- [references/11-thinkcell-source-audit.md](references/11-thinkcell-source-audit.md) — 官方手册核对表。
+- [references/12-thinkcell-web-engineering.md](references/12-thinkcell-web-engineering.md) — 计算/图形/注释工程契约。
+- [references/13-thinkcell-retail-recipes.md](references/13-thinkcell-retail-recipes.md) — 零售与供应链映射。
+- [examples/thinkcell-dashboard-spec.json](examples/thinkcell-dashboard-spec.json) — 4 个带模拟数据的业务图表示例。
+- [scripts/validate_thinkcell.py](scripts/validate_thinkcell.py) — 数量、来源、数学不变量与画廊映射校验。
+
+调用：`$editorial-data-viz 结合 T001 的编辑式风格和 thinkcell 商业图形库，为零售采购分析设计 Mekko + 瀑布归因 + 组合图 + 甘特，并添加自动差异与 CAGR 注释。`
+
+**声明：** 这是基于 think-cell 官方文档的网页端独立开发指南，不含 think-cell 专有源码、可编辑 PPT 对象或商用插件功能，也不是 think-cell 官方合作项目。
 
 ## v1.1 新增：专业图形设计资产
 
@@ -22,6 +40,9 @@ editorial-data-viz-skill/
 ├── SKILL.md                         # 调用规则、流程、边界
 ├── charts/catalog.json              # 30 种专业图表配方
 ├── charts/README.md                 # 选型原则与图表目录
+├── thinkcell/catalog.json           # 16 官方菜单入口 + 48 变体
+├── thinkcell/annotations.json       # 19 种自动注释与增强能力
+├── thinkcell/README.md              # 来源、使用和边界
 ├── README.md                        # 使用与安装
 ├── agents/openai.yaml               # 显示名称与默认调用语
 ├── templates/
@@ -35,6 +56,7 @@ editorial-data-viz-skill/
 │   ├── add_template.py              # 新增模板、自动占用下个槽位
 │   └── validate_skill.py            # 校验完整性
 ├── assets/editorial-demo.html       # 基础编辑式叙事示例
+├── assets/thinkcell-chart-gallery.html # 16 类商业图形的原创 SVG 演示
 └── assets/pro-chart-gallery.html    # 15 种专业 SVG 图形演示
 ```
 
@@ -69,7 +91,7 @@ python scripts/validate_skill.py
 
 ## 演示
 
-直接双击打开 `assets/editorial-demo.html`（编辑式叙事）或 `assets/pro-chart-gallery.html`（15 种专业 SVG 图形），无需安装依赖。演示均为原创模拟数据，而非 Google 模板原站复刻。
+直接双击打开 `assets/editorial-demo.html`（编辑式叙事）、`assets/pro-chart-gallery.html`（15 种专业 SVG 图形）或 `assets/thinkcell-chart-gallery.html`（16 种 think-cell 方法论网页图形），无需安装依赖。演示均为原创模拟数据，而非 Google 模板原站复刻。
 
 ## 规范与溯源
 

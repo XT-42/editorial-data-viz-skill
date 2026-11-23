@@ -1,0 +1,1102 @@
+{
+  "version": "1.2.0",
+  "license_note": "原创网页端实现规范，非 think-cell 官方产品；不复制其专有代码、素材、图标或商标。",
+  "status": "official-menu-verified-variants-classified",
+  "verified_at": "2026-11-23",
+  "company_claim": "think-cell 官网宣称 40+ 图表类型，计数口径并不等于菜单独立按钮数量",
+  "menu_count": 16,
+  "variant_count": 48,
+  "conceptual_policy": "16菜单入口 + 48类官方文档描述的变体或应用；不能把48误写为48菜单按钮。",
+  "sources": {
+    "menu": "https://www.think-cell.com/en/resources/manual/basicconcepts",
+    "col": "https://www.think-cell.com/en/resources/manual/column-line-area-charts",
+    "water": "https://www.think-cell.com/en/resources/manual/waterfall",
+    "mekko": "https://www.think-cell.com/en/resources/manual/mekko",
+    "pie": "https://www.think-cell.com/en/resources/manual/quantitative-charts",
+    "scatter": "https://www.think-cell.com/en/resources/manual/scatterbubble",
+    "gantt": "https://www.think-cell.com/en/resources/manual/gantt",
+    "prod": "https://www.think-cell.com/zh/product/think-cell-charts",
+    "annot": "https://www.think-cell.com/en/resources/manual/chartdecorations",
+    "table": "https://www.think-cell.com/en/resources/manual/charts-with-data-tables"
+  },
+  "menu": [
+    {
+      "id": "stacked-column-bar",
+      "index": 1,
+      "name_zh": "堆积柱形与条形",
+      "name_en": "Stacked column/bar",
+      "family": "composition",
+      "source_url": "https://www.think-cell.com/en/resources/manual/column-line-area-charts",
+      "fields": [
+        "category",
+        "series",
+        "value"
+      ],
+      "encoding": "同量纲可加的堆积结构",
+      "risk": "堆积顺序与负值须显式处理",
+      "evidence": "official-menu-or-product-icon",
+      "web_renderers": [
+        "SVG/D3",
+        "visx",
+        "ECharts"
+      ],
+      "demo": true
+    },
+    {
+      "id": "stacked-100-column-bar",
+      "index": 2,
+      "name_zh": "100%堆积柱形与条形",
+      "name_en": "100% stacked column/bar",
+      "family": "composition",
+      "source_url": "https://www.think-cell.com/en/resources/manual/column-line-area-charts",
+      "fields": [
+        "category",
+        "series",
+        "value"
+      ],
+      "encoding": "类别内部标准化成100%",
+      "risk": "失去绝对规模；显示分母",
+      "evidence": "official-menu-or-product-icon",
+      "web_renderers": [
+        "SVG/D3",
+        "visx",
+        "ECharts"
+      ],
+      "demo": true
+    },
+    {
+      "id": "clustered-column-bar",
+      "index": 3,
+      "name_zh": "簇状柱形与条形",
+      "name_en": "Clustered column/bar",
+      "family": "comparison",
+      "source_url": "https://www.think-cell.com/en/resources/manual/column-line-area-charts",
+      "fields": [
+        "category",
+        "series",
+        "value"
+      ],
+      "encoding": "分组并列比较",
+      "risk": "同零基线且控制系列个数",
+      "evidence": "official-menu-or-product-icon",
+      "web_renderers": [
+        "SVG/D3",
+        "visx",
+        "ECharts"
+      ],
+      "demo": true
+    },
+    {
+      "id": "waterfall-build-up",
+      "index": 4,
+      "name_zh": "上行瀑布图",
+      "name_en": "Build-up waterfall",
+      "family": "decomposition",
+      "source_url": "https://www.think-cell.com/en/resources/manual/waterfall",
+      "fields": [
+        "step",
+        "delta",
+        "is_total"
+      ],
+      "encoding": "从起始值逐步累计增减",
+      "risk": "桥接逐项守恒",
+      "evidence": "official-menu-or-product-icon",
+      "web_renderers": [
+        "SVG/D3",
+        "visx",
+        "ECharts"
+      ],
+      "demo": true
+    },
+    {
+      "id": "waterfall-build-down",
+      "index": 5,
+      "name_zh": "下行瀑布图",
+      "name_en": "Build-down waterfall",
+      "family": "decomposition",
+      "source_url": "https://www.think-cell.com/en/resources/manual/waterfall",
+      "fields": [
+        "step",
+        "delta",
+        "is_total"
+      ],
+      "encoding": "从起始值分解扣减与增加",
+      "risk": "负值方向须与业务含义一致",
+      "evidence": "official-menu-or-product-icon",
+      "web_renderers": [
+        "SVG/D3",
+        "visx",
+        "ECharts"
+      ],
+      "demo": true
+    },
+    {
+      "id": "mekko-unit",
+      "index": 6,
+      "name_zh": "单位轴 Mekko",
+      "name_en": "Mekko with units",
+      "family": "composition",
+      "source_url": "https://www.think-cell.com/en/resources/manual/mekko",
+      "fields": [
+        "category",
+        "series",
+        "value",
+        "x_extent"
+      ],
+      "encoding": "列宽 X extent 独立给定，段高由各系列绝对数值决定，横纵轴独立输入",
+      "risk": "不应将类别列总量直接当宽度；X extent 与纵轴单位需分别注明",
+      "evidence": "official-menu-or-product-icon",
+      "web_renderers": [
+        "SVG/D3",
+        "visx",
+        "ECharts"
+      ],
+      "demo": true
+    },
+    {
+      "id": "mekko-percent",
+      "index": 7,
+      "name_zh": "百分比轴 Mekko",
+      "name_en": "Mekko with percent axis",
+      "family": "composition",
+      "source_url": "https://www.think-cell.com/en/resources/manual/mekko",
+      "fields": [
+        "category",
+        "series",
+        "value"
+      ],
+      "encoding": "列宽反映总量、内部高度反映占比",
+      "risk": "面积表示全局绝对量份额",
+      "evidence": "official-menu-or-product-icon",
+      "web_renderers": [
+        "SVG/D3",
+        "visx",
+        "ECharts"
+      ],
+      "demo": true
+    },
+    {
+      "id": "stacked-area",
+      "index": 8,
+      "name_zh": "堆积面积图",
+      "name_en": "Stacked area",
+      "family": "trend",
+      "source_url": "https://www.think-cell.com/en/resources/manual/column-line-area-charts",
+      "fields": [
+        "date",
+        "series",
+        "value"
+      ],
+      "encoding": "总量与构成的时间变化",
+      "risk": "中间层的比较不宜过度解读",
+      "evidence": "official-menu-or-product-icon",
+      "web_renderers": [
+        "SVG/D3",
+        "visx",
+        "ECharts"
+      ],
+      "demo": true
+    },
+    {
+      "id": "stacked-100-area",
+      "index": 9,
+      "name_zh": "100%堆积面积图",
+      "name_en": "100% stacked area",
+      "family": "trend",
+      "source_url": "https://www.think-cell.com/en/resources/manual/column-line-area-charts",
+      "fields": [
+        "date",
+        "series",
+        "value"
+      ],
+      "encoding": "构成比例的时间变化",
+      "risk": "分母与绝对量须另附",
+      "evidence": "official-menu-or-product-icon",
+      "web_renderers": [
+        "SVG/D3",
+        "visx",
+        "ECharts"
+      ],
+      "demo": true
+    },
+    {
+      "id": "line-profile",
+      "index": 10,
+      "name_zh": "折线与轮廓图",
+      "name_en": "Line / profile",
+      "family": "trend",
+      "source_url": "https://www.think-cell.com/en/resources/manual/column-line-area-charts",
+      "fields": [
+        "x",
+        "series",
+        "value"
+      ],
+      "encoding": "趋势/旋转后比较轮廓",
+      "risk": "时间粒度一致且缺失不补零",
+      "evidence": "official-menu-or-product-icon",
+      "web_renderers": [
+        "SVG/D3",
+        "visx",
+        "ECharts"
+      ],
+      "demo": true
+    },
+    {
+      "id": "combination",
+      "index": 11,
+      "name_zh": "组合图",
+      "name_en": "Combination",
+      "family": "comparison",
+      "source_url": "https://www.think-cell.com/en/resources/manual/column-line-area-charts",
+      "fields": [
+        "category",
+        "bar_value",
+        "line_value"
+      ],
+      "encoding": "柱线组合/单轴或双轴",
+      "risk": "双轴不可凭视觉暗示因果",
+      "evidence": "official-menu-or-product-icon",
+      "web_renderers": [
+        "SVG/D3",
+        "visx",
+        "ECharts"
+      ],
+      "demo": true
+    },
+    {
+      "id": "pie",
+      "index": 12,
+      "name_zh": "饼图",
+      "name_en": "Pie",
+      "family": "composition",
+      "source_url": "https://www.think-cell.com/en/resources/manual/quantitative-charts",
+      "fields": [
+        "category",
+        "value"
+      ],
+      "encoding": "扇区角度对应构成份额",
+      "risk": "少类别且分母合计明确",
+      "evidence": "official-menu-or-product-icon",
+      "web_renderers": [
+        "SVG/D3",
+        "visx",
+        "ECharts"
+      ],
+      "demo": true
+    },
+    {
+      "id": "doughnut",
+      "index": 13,
+      "name_zh": "圆环图",
+      "name_en": "Doughnut",
+      "family": "composition",
+      "source_url": "https://www.think-cell.com/en/resources/manual/quantitative-charts",
+      "fields": [
+        "category",
+        "value"
+      ],
+      "encoding": "环形弧度编码构成份额",
+      "risk": "同心多环须说明各环分母",
+      "evidence": "official-menu-or-product-icon",
+      "web_renderers": [
+        "SVG/D3",
+        "visx",
+        "ECharts"
+      ],
+      "demo": true
+    },
+    {
+      "id": "scatter",
+      "index": 14,
+      "name_zh": "散点图",
+      "name_en": "Scatter",
+      "family": "distribution",
+      "source_url": "https://www.think-cell.com/en/resources/manual/scatterbubble",
+      "fields": [
+        "x",
+        "y",
+        "category"
+      ],
+      "encoding": "两个指标的坐标关系",
+      "risk": "相关不等于因果",
+      "evidence": "official-menu-or-product-icon",
+      "web_renderers": [
+        "SVG/D3",
+        "visx",
+        "ECharts"
+      ],
+      "demo": true
+    },
+    {
+      "id": "bubble",
+      "index": 15,
+      "name_zh": "气泡图",
+      "name_en": "Bubble",
+      "family": "distribution",
+      "source_url": "https://www.think-cell.com/en/resources/manual/scatterbubble",
+      "fields": [
+        "x",
+        "y",
+        "size",
+        "category"
+      ],
+      "encoding": "二维坐标+面积编码第三变量",
+      "risk": "半径按数值平方根缩放",
+      "evidence": "official-menu-or-product-icon",
+      "web_renderers": [
+        "SVG/D3",
+        "visx",
+        "ECharts"
+      ],
+      "demo": true
+    },
+    {
+      "id": "gantt",
+      "index": 16,
+      "name_zh": "甘特图",
+      "name_en": "Gantt / timeline",
+      "family": "timeline",
+      "source_url": "https://www.think-cell.com/en/resources/manual/gantt",
+      "fields": [
+        "task",
+        "start",
+        "end",
+        "milestone"
+      ],
+      "encoding": "日期轴活动条及里程碑",
+      "risk": "日期正确、项目行与状态区分",
+      "evidence": "official-menu-or-product-icon",
+      "web_renderers": [
+        "SVG/D3",
+        "visx",
+        "ECharts"
+      ],
+      "demo": true
+    }
+  ],
+  "variants": [
+    {
+      "id": "simple-column",
+      "parent_menu_id": "stacked-column-bar",
+      "name_zh": "普通柱形",
+      "question": "单系列排名",
+      "fields": [
+        "category",
+        "value"
+      ],
+      "rule": "零基线",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/column-line-area-charts",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "simple-bar",
+      "parent_menu_id": "stacked-column-bar",
+      "name_zh": "普通条形",
+      "question": "长文本横向排名",
+      "fields": [
+        "category",
+        "value"
+      ],
+      "rule": "零基线",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/column-line-area-charts",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "stacked-column",
+      "parent_menu_id": "stacked-column-bar",
+      "name_zh": "堆积柱形",
+      "question": "构成和总量",
+      "fields": [
+        "category",
+        "series",
+        "value"
+      ],
+      "rule": "同量纲叠加",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/column-line-area-charts",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "stacked-bar",
+      "parent_menu_id": "stacked-column-bar",
+      "name_zh": "堆积条形",
+      "question": "横向对比构成",
+      "fields": [
+        "category",
+        "series",
+        "value"
+      ],
+      "rule": "同量纲叠加",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/column-line-area-charts",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "stacked-clustered-column",
+      "parent_menu_id": "stacked-column-bar",
+      "name_zh": "簇状堆积柱形",
+      "question": "多层比较",
+      "fields": [
+        "category",
+        "cluster",
+        "series",
+        "value"
+      ],
+      "rule": "区分群组",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/column-line-area-charts",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "stacked-100-column",
+      "parent_menu_id": "stacked-100-column-bar",
+      "name_zh": "百分比堆积柱形",
+      "question": "构成比例比较",
+      "fields": [
+        "category",
+        "series",
+        "value"
+      ],
+      "rule": "展示分母",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/column-line-area-charts",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "stacked-100-bar",
+      "parent_menu_id": "stacked-100-column-bar",
+      "name_zh": "百分比堆积条形",
+      "question": "横向比例比较",
+      "fields": [
+        "category",
+        "series",
+        "value"
+      ],
+      "rule": "总规模缺失",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/column-line-area-charts",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "clustered-column",
+      "parent_menu_id": "clustered-column-bar",
+      "name_zh": "簇状柱形",
+      "question": "并列同类比较",
+      "fields": [
+        "category",
+        "series",
+        "value"
+      ],
+      "rule": "零基线",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/column-line-area-charts",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "clustered-bar",
+      "parent_menu_id": "clustered-column-bar",
+      "name_zh": "簇状条形",
+      "question": "并列排名",
+      "fields": [
+        "category",
+        "series",
+        "value"
+      ],
+      "rule": "零基线",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/column-line-area-charts",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "butterfly",
+      "parent_menu_id": "clustered-column-bar",
+      "name_zh": "蝴蝶对比图",
+      "question": "镜像比较两组",
+      "fields": [
+        "category",
+        "left",
+        "right"
+      ],
+      "rule": "镜像方向不一定表示负值",
+      "evidence": "documented-application",
+      "source_url": "https://www.think-cell.com/zh/product/think-cell-charts",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "tornado",
+      "parent_menu_id": "clustered-column-bar",
+      "name_zh": "龙卷风敏感性图",
+      "question": "展示影响范围",
+      "fields": [
+        "driver",
+        "low",
+        "high"
+      ],
+      "rule": "根据影响幅度排序",
+      "evidence": "documented-application",
+      "source_url": "https://www.think-cell.com/zh/product/think-cell-charts",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "waterfall-up",
+      "parent_menu_id": "waterfall-build-up",
+      "name_zh": "递增瀑布",
+      "question": "增量因素桥接",
+      "fields": [
+        "step",
+        "delta",
+        "is_total"
+      ],
+      "rule": "可加守恒",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/waterfall",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "waterfall-stacked",
+      "parent_menu_id": "waterfall-build-up",
+      "name_zh": "分层瀑布",
+      "question": "同一步多项贡献",
+      "fields": [
+        "step",
+        "series",
+        "delta"
+      ],
+      "rule": "按系列守恒",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/waterfall",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "waterfall-subtotals",
+      "parent_menu_id": "waterfall-build-up",
+      "name_zh": "小计瀑布",
+      "question": "多个过程合计",
+      "fields": [
+        "step",
+        "delta",
+        "is_subtotal"
+      ],
+      "rule": "小计为累计值",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/waterfall",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "waterfall-below-zero",
+      "parent_menu_id": "waterfall-build-up",
+      "name_zh": "跨零线瀑布",
+      "question": "亏盈交替",
+      "fields": [
+        "step",
+        "delta",
+        "is_total"
+      ],
+      "rule": "统一增减方向",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/waterfall",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "waterfall-down",
+      "parent_menu_id": "waterfall-build-down",
+      "name_zh": "递减瀑布",
+      "question": "总量逐项扣减",
+      "fields": [
+        "step",
+        "delta",
+        "is_total"
+      ],
+      "rule": "负值按符号处理",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/waterfall",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "waterfall-horizontal",
+      "parent_menu_id": "waterfall-build-down",
+      "name_zh": "横向瀑布",
+      "question": "长标签桥接",
+      "fields": [
+        "step",
+        "delta",
+        "is_total"
+      ],
+      "rule": "旋转不改变计算",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/waterfall",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "mekko-units",
+      "parent_menu_id": "mekko-unit",
+      "name_zh": "单位轴 Mekko",
+      "question": "类别之间绝对量差异",
+      "fields": [
+        "category",
+        "series",
+        "value",
+        "x_extent"
+      ],
+      "rule": "X extent 行指定列宽；Y轴段高由绝对值独立控制",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/mekko",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "mekko-ridges",
+      "parent_menu_id": "mekko-unit",
+      "name_zh": "带脊线 Mekko",
+      "question": "强调内部堆叠边界",
+      "fields": [
+        "category",
+        "series",
+        "value"
+      ],
+      "rule": "脊线不是独立数据",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/mekko",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "mekko-percent-axis",
+      "parent_menu_id": "mekko-percent",
+      "name_zh": "百分比 Mekko",
+      "question": "规模和构成同时比较",
+      "fields": [
+        "category",
+        "series",
+        "value"
+      ],
+      "rule": "面积对应全局份额",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/mekko",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "mekko-other-series",
+      "parent_menu_id": "mekko-percent",
+      "name_zh": "其他项 Mekko",
+      "question": "长尾合并",
+      "fields": [
+        "category",
+        "series",
+        "value"
+      ],
+      "rule": "可追溯其他类",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/mekko",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "stacked-area-time",
+      "parent_menu_id": "stacked-area",
+      "name_zh": "堆积面积时序",
+      "question": "流量结构变化",
+      "fields": [
+        "date",
+        "series",
+        "value"
+      ],
+      "rule": "时间连续",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/column-line-area-charts",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "area-with-errors",
+      "parent_menu_id": "stacked-area",
+      "name_zh": "面积及误差线",
+      "question": "估计值区间",
+      "fields": [
+        "date",
+        "value",
+        "lower",
+        "upper"
+      ],
+      "rule": "区间来源要注明",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/column-line-area-charts",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "stacked-100-area-time",
+      "parent_menu_id": "stacked-100-area",
+      "name_zh": "100%面积时序",
+      "question": "渠道比例变化",
+      "fields": [
+        "date",
+        "series",
+        "value"
+      ],
+      "rule": "展示总量基数",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/column-line-area-charts",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "line-time",
+      "parent_menu_id": "line-profile",
+      "name_zh": "时间折线",
+      "question": "趋势与拐点",
+      "fields": [
+        "date",
+        "series",
+        "value"
+      ],
+      "rule": "不能把缺失补零",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/column-line-area-charts",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "profile-rotated",
+      "parent_menu_id": "line-profile",
+      "name_zh": "轮廓线",
+      "question": "旋转坐标比较",
+      "fields": [
+        "category",
+        "value"
+      ],
+      "rule": "不改变指标含义",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/column-line-area-charts",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "line-with-errorbars",
+      "parent_menu_id": "line-profile",
+      "name_zh": "带误差线折线",
+      "question": "显示区间不确定性",
+      "fields": [
+        "date",
+        "estimate",
+        "low",
+        "high"
+      ],
+      "rule": "注明区间类型",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/column-line-area-charts",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "candlestick-composed",
+      "parent_menu_id": "line-profile",
+      "name_zh": "蜡烛图式组合",
+      "question": "价格OHLC展示",
+      "fields": [
+        "date",
+        "open",
+        "high",
+        "low",
+        "close"
+      ],
+      "rule": "属于组合应用非单独菜单入口",
+      "evidence": "documented-application",
+      "source_url": "https://www.think-cell.com/zh/product/think-cell-charts",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "football-field-composed",
+      "parent_menu_id": "line-profile",
+      "name_zh": "估值区间足球场图",
+      "question": "多方法估值区间",
+      "fields": [
+        "method",
+        "low",
+        "high"
+      ],
+      "rule": "估值区间定义透明",
+      "evidence": "documented-application",
+      "source_url": "https://www.think-cell.com/zh/product/think-cell-charts",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "column-line",
+      "parent_menu_id": "combination",
+      "name_zh": "柱线组合",
+      "question": "销量与增长趋势",
+      "fields": [
+        "date",
+        "volume",
+        "rate"
+      ],
+      "rule": "不同单位用清楚双轴",
+      "evidence": "documented-application",
+      "source_url": "https://www.think-cell.com/zh/product/think-cell-charts",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "pareto-composed",
+      "parent_menu_id": "combination",
+      "name_zh": "帕累托组合",
+      "question": "累计贡献",
+      "fields": [
+        "category",
+        "value",
+        "cumshare"
+      ],
+      "rule": "累计份额不超过100%",
+      "evidence": "documented-application",
+      "source_url": "https://www.think-cell.com/zh/product/think-cell-charts",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "combo-dual-axis",
+      "parent_menu_id": "combination",
+      "name_zh": "双轴组合",
+      "question": "对照两个尺度",
+      "fields": [
+        "category",
+        "left",
+        "right"
+      ],
+      "rule": "不暗示因果",
+      "evidence": "documented-application",
+      "source_url": "https://www.think-cell.com/zh/product/think-cell-charts",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "net-line-reference",
+      "parent_menu_id": "combination",
+      "name_zh": "净线参考值",
+      "question": "与预算目标比较",
+      "fields": [
+        "category",
+        "value",
+        "target"
+      ],
+      "rule": "目标口径需标示",
+      "evidence": "documented-application",
+      "source_url": "https://www.think-cell.com/zh/product/think-cell-charts",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "pie-standard",
+      "parent_menu_id": "pie",
+      "name_zh": "普通饼图",
+      "question": "少量类别构成",
+      "fields": [
+        "category",
+        "value"
+      ],
+      "rule": "分母100%",
+      "evidence": "documented-application",
+      "source_url": "https://www.think-cell.com/zh/product/think-cell-charts",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "pie-exploded",
+      "parent_menu_id": "pie",
+      "name_zh": "分离扇区饼图",
+      "question": "强调单一类别",
+      "fields": [
+        "category",
+        "value"
+      ],
+      "rule": "角度不应扭曲",
+      "evidence": "documented-application",
+      "source_url": "https://www.think-cell.com/zh/product/think-cell-charts",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "pie-of-pie",
+      "parent_menu_id": "pie",
+      "name_zh": "复合饼图",
+      "question": "深入长尾类别",
+      "fields": [
+        "group",
+        "subgroup",
+        "value"
+      ],
+      "rule": "总量一致",
+      "evidence": "documented-application",
+      "source_url": "https://www.think-cell.com/zh/product/think-cell-charts",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "doughnut-standard",
+      "parent_menu_id": "doughnut",
+      "name_zh": "普通圆环",
+      "question": "少量类别结构",
+      "fields": [
+        "category",
+        "value"
+      ],
+      "rule": "分母100%",
+      "evidence": "documented-application",
+      "source_url": "https://www.think-cell.com/zh/product/think-cell-charts",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "doughnut-concentric",
+      "parent_menu_id": "doughnut",
+      "name_zh": "同心圆环",
+      "question": "多层结构对比",
+      "fields": [
+        "group",
+        "category",
+        "value"
+      ],
+      "rule": "明确每环分母",
+      "evidence": "documented-application",
+      "source_url": "https://www.think-cell.com/zh/product/think-cell-charts",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "gauge-doughnut",
+      "parent_menu_id": "doughnut",
+      "name_zh": "量规仪表圆环",
+      "question": "目标进度展示",
+      "fields": [
+        "actual",
+        "target"
+      ],
+      "rule": "超额比例不能截为100%",
+      "evidence": "documented-application",
+      "source_url": "https://www.think-cell.com/zh/product/think-cell-charts",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "scatter-standard",
+      "parent_menu_id": "scatter",
+      "name_zh": "基本散点",
+      "question": "双变量关系",
+      "fields": [
+        "x",
+        "y",
+        "group"
+      ],
+      "rule": "相关不是因果",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/scatterbubble",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "scatter-trendline",
+      "parent_menu_id": "scatter",
+      "name_zh": "回归散点",
+      "question": "拟合趋势关系",
+      "fields": [
+        "x",
+        "y",
+        "group"
+      ],
+      "rule": "模型注明参数",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/scatterbubble",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "scatter-partition",
+      "parent_menu_id": "scatter",
+      "name_zh": "散点分区",
+      "question": "经营阈值象限",
+      "fields": [
+        "x",
+        "y",
+        "threshold_x",
+        "threshold_y"
+      ],
+      "rule": "阈值来源",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/scatterbubble",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "bubble-standard",
+      "parent_menu_id": "bubble",
+      "name_zh": "基本气泡",
+      "question": "三维数据关系",
+      "fields": [
+        "x",
+        "y",
+        "size"
+      ],
+      "rule": "面积与数值成比例",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/scatterbubble",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "bubble-trendline",
+      "parent_menu_id": "bubble",
+      "name_zh": "气泡加权回归",
+      "question": "规模加权趋势",
+      "fields": [
+        "x",
+        "y",
+        "size"
+      ],
+      "rule": "加权公式须说明",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/scatterbubble",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "bubble-partition",
+      "parent_menu_id": "bubble",
+      "name_zh": "气泡象限",
+      "question": "品类组合策略",
+      "fields": [
+        "x",
+        "y",
+        "size",
+        "group"
+      ],
+      "rule": "显示分区阈值",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/scatterbubble",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "gantt-activities",
+      "parent_menu_id": "gantt",
+      "name_zh": "活动甘特条",
+      "question": "项目工期展示",
+      "fields": [
+        "task",
+        "start",
+        "end"
+      ],
+      "rule": "end不早于start",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/gantt",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "gantt-milestones",
+      "parent_menu_id": "gantt",
+      "name_zh": "里程碑甘特",
+      "question": "关键日期节点",
+      "fields": [
+        "task",
+        "start",
+        "end",
+        "milestone"
+      ],
+      "rule": "里程碑日期正确",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/gantt",
+      "is_separate_insertion_button": false
+    },
+    {
+      "id": "gantt-status-columns",
+      "parent_menu_id": "gantt",
+      "name_zh": "状态列甘特",
+      "question": "进度与风险跟踪",
+      "fields": [
+        "task",
+        "start",
+        "end",
+        "status"
+      ],
+      "rule": "状态不等于完成百分比",
+      "evidence": "documented-variant",
+      "source_url": "https://www.think-cell.com/en/resources/manual/gantt",
+      "is_separate_insertion_button": false
+    }
+  ]
+}

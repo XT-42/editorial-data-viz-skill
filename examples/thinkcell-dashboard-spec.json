@@ -1,0 +1,130 @@
+{
+  "version": "1.2.0",
+  "examples": [
+    {
+      "title": "销售增量解释",
+      "chartId": "waterfall-build-up",
+      "variantId": "waterfall-subtotals",
+      "source": "MOCK",
+      "grain": "month",
+      "unit": "万元",
+      "baseline": 180,
+      "deltas": [
+        {
+          "name": "门店扩张",
+          "delta": 42
+        },
+        {
+          "name": "同店波动",
+          "delta": -16
+        },
+        {
+          "name": "新品增量",
+          "delta": 25
+        },
+        {
+          "name": "缺货损失",
+          "delta": -13
+        }
+      ],
+      "expected_total": 218,
+      "annotations": [
+        {
+          "type": "difference-arrows",
+          "anchor": "start-end"
+        },
+        {
+          "type": "grand-totals",
+          "anchor": "end"
+        }
+      ]
+    },
+    {
+      "title": "区域与品类结构",
+      "chartId": "mekko-percent",
+      "variantId": "mekko-percent-axis",
+      "source": "MOCK",
+      "grain": "province-category",
+      "unit": "万元",
+      "data": [
+        {
+          "category": "华东",
+          "series": {
+            "水饮": 40,
+            "零食": 20,
+            "乳品": 30
+          }
+        },
+        {
+          "category": "华南",
+          "series": {
+            "水饮": 20,
+            "零食": 40,
+            "乳品": 10
+          }
+        }
+      ],
+      "annotations": [
+        {
+          "type": "percentage-indicators",
+          "anchor": "column"
+        }
+      ]
+    },
+    {
+      "title": "仓品面积对照（独立X宽度）",
+      "chartId": "mekko-unit",
+      "variantId": "mekko-units",
+      "source": "MOCK",
+      "grain": "warehouse-category",
+      "unit": "件",
+      "data": [
+        {
+          "category": "A仓",
+          "x_extent": 32,
+          "series": {
+            "水饮": 40,
+            "零食": 20
+          }
+        },
+        {
+          "category": "B仓",
+          "x_extent": 67,
+          "series": {
+            "水饮": 18,
+            "零食": 42
+          }
+        }
+      ]
+    },
+    {
+      "title": "供应商履约时间线",
+      "chartId": "gantt",
+      "variantId": "gantt-milestones",
+      "source": "MOCK",
+      "grain": "supplier-task",
+      "tasks": [
+        {
+          "id": "A",
+          "task": "排产",
+          "start": "2026-11-20",
+          "end": "2026-11-26",
+          "milestone": "2026-11-27"
+        },
+        {
+          "id": "B",
+          "task": "运输",
+          "start": "2026-11-27",
+          "end": "2026-12-02",
+          "milestone": "2026-12-03"
+        }
+      ],
+      "annotations": [
+        {
+          "type": "gantt-milestones",
+          "anchor": "date"
+        }
+      ]
+    }
+  ]
+}
