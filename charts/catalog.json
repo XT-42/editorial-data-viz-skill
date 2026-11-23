@@ -1,0 +1,785 @@
+{
+  "version": "1.1.0",
+  "source_policy": {
+    "original_template_access": "not-verified",
+    "confirmed_template_capabilities": [
+      "responsive SVG charts",
+      "live filters",
+      "scrollytelling columns",
+      "accessible data tables"
+    ],
+    "all_chart_patterns_origin": "independent-professional-extension",
+    "note": "本图谱是专业扩展，不宣称出自 Google AI Studio 原网页。"
+  },
+  "families": [
+    "trend",
+    "comparison",
+    "decomposition",
+    "flow",
+    "composition",
+    "distribution",
+    "retail",
+    "geospatial"
+  ],
+  "charts": [
+    {
+      "id": "annotated-line",
+      "name_zh": "注释趋势图",
+      "name_en": "Annotated line",
+      "family": "trend",
+      "question": "指标何时变化，拐点在哪里？",
+      "fields": [
+        "date",
+        "value"
+      ],
+      "encoding": "X=时间；Y=指标；点/线=趋势",
+      "interaction": [
+        "区间刷选",
+        "时间对比",
+        "拐点提示"
+      ],
+      "annotation": "峰谷点和基准线",
+      "risk": "时间间隔不规则时不可按等距类目强制连接",
+      "renderers": [
+        "visx",
+        "D3",
+        "ECharts"
+      ],
+      "demo": true,
+      "evidence_status": "independent-professional-extension"
+    },
+    {
+      "id": "small-multiples",
+      "name_zh": "小倍数趋势图",
+      "name_en": "Small multiples",
+      "family": "trend",
+      "question": "多个品类的趋势相同吗？",
+      "fields": [
+        "date",
+        "group",
+        "value"
+      ],
+      "encoding": "面板=组；X=时间；Y=指标",
+      "interaction": [
+        "同步缩放",
+        "面板对比"
+      ],
+      "annotation": "标记共同转折点",
+      "risk": "比较不同面板必须保持轴域一致或明确标注独立轴",
+      "renderers": [
+        "D3",
+        "visx",
+        "G2"
+      ],
+      "demo": true,
+      "evidence_status": "independent-professional-extension"
+    },
+    {
+      "id": "slopegraph",
+      "name_zh": "坡度图",
+      "name_en": "Slopegraph",
+      "family": "comparison",
+      "question": "两个时点的排名或值怎么变？",
+      "fields": [
+        "group",
+        "before",
+        "after"
+      ],
+      "encoding": "两侧位置=时点值；连线=变化",
+      "interaction": [
+        "突出某组",
+        "排序切换"
+      ],
+      "annotation": "起止值和差值",
+      "risk": "类别过多交叉严重；不同单位不可联线",
+      "renderers": [
+        "D3",
+        "visx"
+      ],
+      "demo": true,
+      "evidence_status": "independent-professional-extension"
+    },
+    {
+      "id": "bump-chart",
+      "name_zh": "排名变化图",
+      "name_en": "Bump chart",
+      "family": "trend",
+      "question": "排名随时间如何变化？",
+      "fields": [
+        "date",
+        "group",
+        "rank"
+      ],
+      "encoding": "X=时间；Y=名次（1在上）",
+      "interaction": [
+        "系列聚焦",
+        "时间高亮"
+      ],
+      "annotation": "末端排名直标",
+      "risk": "不可用排名推断份额或绝对规模",
+      "renderers": [
+        "D3",
+        "G2",
+        "visx"
+      ],
+      "demo": true,
+      "evidence_status": "independent-professional-extension"
+    },
+    {
+      "id": "calendar-heatmap",
+      "name_zh": "日历热力图",
+      "name_en": "Calendar heatmap",
+      "family": "trend",
+      "question": "异常集中在哪些日期？",
+      "fields": [
+        "date",
+        "value"
+      ],
+      "encoding": "位置=周与星期；颜色=指标",
+      "interaction": [
+        "日期点击",
+        "日历范围"
+      ],
+      "annotation": "节假日或事件标注",
+      "risk": "缺失值与零必须使用不同颜色或图例",
+      "renderers": [
+        "D3",
+        "ECharts"
+      ],
+      "demo": true,
+      "evidence_status": "independent-professional-extension"
+    },
+    {
+      "id": "control-chart",
+      "name_zh": "控制图",
+      "name_en": "Control chart",
+      "family": "trend",
+      "question": "波动是否超出正常范围？",
+      "fields": [
+        "date",
+        "value",
+        "center",
+        "ucl",
+        "lcl"
+      ],
+      "encoding": "时间点+中心线+控制限",
+      "interaction": [
+        "异常钻取",
+        "规则切换"
+      ],
+      "annotation": "超控制限点与规则",
+      "risk": "控制限来自统计过程，不等于业务目标线",
+      "renderers": [
+        "D3",
+        "ECharts"
+      ],
+      "demo": true,
+      "evidence_status": "independent-professional-extension"
+    },
+    {
+      "id": "dumbbell",
+      "name_zh": "哑铃对比图",
+      "name_en": "Dumbbell plot",
+      "family": "comparison",
+      "question": "不同区域两期差距有多大？",
+      "fields": [
+        "group",
+        "before",
+        "after"
+      ],
+      "encoding": "两点位置=两期值；连接线=变化",
+      "interaction": [
+        "排序",
+        "突出差距"
+      ],
+      "annotation": "首末值及差额",
+      "risk": "不同指标或不同单位不能直接连线",
+      "renderers": [
+        "visx",
+        "D3",
+        "G2"
+      ],
+      "demo": true,
+      "evidence_status": "independent-professional-extension"
+    },
+    {
+      "id": "bullet",
+      "name_zh": "子弹图",
+      "name_en": "Bullet chart",
+      "family": "comparison",
+      "question": "实际值距目标还有多远？",
+      "fields": [
+        "group",
+        "actual",
+        "target",
+        "range_low",
+        "range_high"
+      ],
+      "encoding": "横条=实际；刻度=目标；背景=绩效区间",
+      "interaction": [
+        "目标切换",
+        "钻取"
+      ],
+      "annotation": "目标完成差额",
+      "risk": "区间须有业务定义，百分比不能冒充绝对值",
+      "renderers": [
+        "D3",
+        "visx",
+        "ECharts custom"
+      ],
+      "demo": true,
+      "evidence_status": "independent-professional-extension"
+    },
+    {
+      "id": "lollipop",
+      "name_zh": "棒棒糖排名图",
+      "name_en": "Lollipop ranking",
+      "family": "comparison",
+      "question": "TopN 对象谁领先？",
+      "fields": [
+        "group",
+        "value"
+      ],
+      "encoding": "横线端点和位置=数值",
+      "interaction": [
+        "排序",
+        "TopN调节"
+      ],
+      "annotation": "TopN 与最后一名直接标注",
+      "risk": "当数值需比长度时条形图更易比较",
+      "renderers": [
+        "G2",
+        "D3"
+      ],
+      "demo": false,
+      "evidence_status": "independent-professional-extension"
+    },
+    {
+      "id": "diverging-bars",
+      "name_zh": "正负发散条形图",
+      "name_en": "Diverging bar",
+      "family": "comparison",
+      "question": "哪些对象正向和负向偏离？",
+      "fields": [
+        "group",
+        "delta"
+      ],
+      "encoding": "以零为基线，左右方向为正负",
+      "interaction": [
+        "阈值筛选",
+        "按绝对偏差排序"
+      ],
+      "annotation": "零基线与超过阈值的对象",
+      "risk": "颜色不是唯一正负编码，必须标记符号",
+      "renderers": [
+        "ECharts",
+        "visx"
+      ],
+      "demo": true,
+      "evidence_status": "independent-professional-extension"
+    },
+    {
+      "id": "pareto",
+      "name_zh": "帕累托图",
+      "name_en": "Pareto",
+      "family": "comparison",
+      "question": "少数商品贡献多少销售额？",
+      "fields": [
+        "group",
+        "value",
+        "cumulative_share"
+      ],
+      "encoding": "降序条+累计占比线（双尺度明确）",
+      "interaction": [
+        "TopN",
+        "层级下钻"
+      ],
+      "annotation": "累计80%阈值标注",
+      "risk": "双 Y 轴容易误导，须明确一条为占比",
+      "renderers": [
+        "ECharts",
+        "G2",
+        "D3"
+      ],
+      "demo": false,
+      "evidence_status": "independent-professional-extension"
+    },
+    {
+      "id": "waterfall",
+      "name_zh": "瀑布分解图",
+      "name_en": "Waterfall",
+      "family": "decomposition",
+      "question": "总销售额变化由哪些因素构成？",
+      "fields": [
+        "step",
+        "delta",
+        "is_total"
+      ],
+      "encoding": "浮动柱=增减量；汇总柱=端点值",
+      "interaction": [
+        "步骤钻取",
+        "方案对比"
+      ],
+      "annotation": "桥接、合计、增减符号",
+      "risk": "各分解项必须同单位且无重复归因",
+      "renderers": [
+        "ECharts custom",
+        "D3"
+      ],
+      "demo": true,
+      "evidence_status": "independent-professional-extension"
+    },
+    {
+      "id": "sankey",
+      "name_zh": "桑基流向图",
+      "name_en": "Sankey",
+      "family": "flow",
+      "question": "货品从供应商到仓店如何流动？",
+      "fields": [
+        "source",
+        "target",
+        "value"
+      ],
+      "encoding": "带宽=流量；节点=环节",
+      "interaction": [
+        "节点聚焦",
+        "流量筛选"
+      ],
+      "annotation": "节点数与各环节损耗",
+      "risk": "跨层去重，流量口径一致，不能将存量当流量",
+      "renderers": [
+        "D3-sankey",
+        "ECharts"
+      ],
+      "demo": true,
+      "evidence_status": "independent-professional-extension"
+    },
+    {
+      "id": "funnel",
+      "name_zh": "转化漏斗图",
+      "name_en": "Conversion funnel",
+      "family": "flow",
+      "question": "流程各阶段流失多少？",
+      "fields": [
+        "step",
+        "count"
+      ],
+      "encoding": "按同一群体的阶段顺序排列",
+      "interaction": [
+        "阶段钻取"
+      ],
+      "annotation": "每段转化率/总体转化率",
+      "risk": "各步骤若不是同一 cohort 不可当作转化漏斗",
+      "renderers": [
+        "ECharts",
+        "G2"
+      ],
+      "demo": false,
+      "evidence_status": "independent-professional-extension"
+    },
+    {
+      "id": "chord",
+      "name_zh": "和弦关系图",
+      "name_en": "Chord diagram",
+      "family": "flow",
+      "question": "不同品类间相互关联量多大？",
+      "fields": [
+        "source",
+        "target",
+        "weight"
+      ],
+      "encoding": "弧/带连接强度",
+      "interaction": [
+        "节点高亮",
+        "组别筛选"
+      ],
+      "annotation": "关联方向及权重说明",
+      "risk": "高密度时难读，可替换矩阵热力图",
+      "renderers": [
+        "D3"
+      ],
+      "demo": false,
+      "evidence_status": "independent-professional-extension"
+    },
+    {
+      "id": "treemap",
+      "name_zh": "矩形树图",
+      "name_en": "Treemap",
+      "family": "composition",
+      "question": "多层品类的销售结构如何分布？",
+      "fields": [
+        "category_path",
+        "value"
+      ],
+      "encoding": "面积=规模；矩形嵌套=层级",
+      "interaction": [
+        "点击下钻",
+        "TopN"
+      ],
+      "annotation": "主要份额直接标签",
+      "risk": "面积无法可靠区分相近数值；不能承载负数",
+      "renderers": [
+        "ECharts",
+        "D3",
+        "G2"
+      ],
+      "demo": true,
+      "evidence_status": "independent-professional-extension"
+    },
+    {
+      "id": "marimekko",
+      "name_zh": "马赛克图",
+      "name_en": "Marimekko",
+      "family": "composition",
+      "question": "区域体量与品类结构如何同时变化？",
+      "fields": [
+        "region",
+        "category",
+        "value"
+      ],
+      "encoding": "列宽=区域总量；列内高度=类别占比",
+      "interaction": [
+        "区域筛选"
+      ],
+      "annotation": "每列占比和总量",
+      "risk": "面积编码精度低，须配标签和表格",
+      "renderers": [
+        "D3",
+        "G2"
+      ],
+      "demo": false,
+      "evidence_status": "independent-professional-extension"
+    },
+    {
+      "id": "waffle",
+      "name_zh": "华夫格图",
+      "name_en": "Waffle chart",
+      "family": "composition",
+      "question": "结构占比如何形成直观印象？",
+      "fields": [
+        "group",
+        "share"
+      ],
+      "encoding": "100格按份额占用",
+      "interaction": [
+        "类别聚焦"
+      ],
+      "annotation": "份额与分母",
+      "risk": "不适合小数点精确比较",
+      "renderers": [
+        "D3",
+        "visx"
+      ],
+      "demo": false,
+      "evidence_status": "independent-professional-extension"
+    },
+    {
+      "id": "scatter-quadrant",
+      "name_zh": "四象限散点图",
+      "name_en": "Quadrant scatter",
+      "family": "distribution",
+      "question": "商品销量和毛利率如何分层？",
+      "fields": [
+        "item",
+        "x",
+        "y",
+        "size"
+      ],
+      "encoding": "X=销量；Y=毛利率；点=商品",
+      "interaction": [
+        "框选",
+        "悬浮",
+        "四象限筛选"
+      ],
+      "annotation": "业务阈值线和离群点",
+      "risk": "相关不等于因果，阈值须业务定义",
+      "renderers": [
+        "visx",
+        "ECharts"
+      ],
+      "demo": true,
+      "evidence_status": "independent-professional-extension"
+    },
+    {
+      "id": "hexbin",
+      "name_zh": "六边形聚合散点图",
+      "name_en": "Hexbin density",
+      "family": "distribution",
+      "question": "大量门店指标的密度分布如何？",
+      "fields": [
+        "x",
+        "y",
+        "count"
+      ],
+      "encoding": "六边形颜色=密度，位置=双指标",
+      "interaction": [
+        "刷选",
+        "阈值"
+      ],
+      "annotation": "密度峰值与样本量",
+      "risk": "六边形计数受网格尺寸影响；显示图例",
+      "renderers": [
+        "D3",
+        "deck.gl"
+      ],
+      "demo": false,
+      "evidence_status": "independent-professional-extension"
+    },
+    {
+      "id": "boxplot",
+      "name_zh": "箱线区间图",
+      "name_en": "Box plot",
+      "family": "distribution",
+      "question": "不同区域的门店表现波动如何？",
+      "fields": [
+        "group",
+        "q1",
+        "median",
+        "q3",
+        "min",
+        "max"
+      ],
+      "encoding": "盒体=IQR；横线=中位；须明确须线定义",
+      "interaction": [
+        "组别筛选",
+        "异常点钻取"
+      ],
+      "annotation": "中位数与样本数",
+      "risk": "须线算法不唯一，需要说明1.5×IQR等口径",
+      "renderers": [
+        "G2",
+        "ECharts"
+      ],
+      "demo": true,
+      "evidence_status": "independent-professional-extension"
+    },
+    {
+      "id": "violin",
+      "name_zh": "小提琴图",
+      "name_en": "Violin plot",
+      "family": "distribution",
+      "question": "不同组数据密度形状有什么差别？",
+      "fields": [
+        "group",
+        "value"
+      ],
+      "encoding": "宽度=估计密度；中轴=数值",
+      "interaction": [
+        "组别对比"
+      ],
+      "annotation": "中位及样本数",
+      "risk": "核密度平滑参数影响图形，小样本谨慎使用",
+      "renderers": [
+        "G2",
+        "D3"
+      ],
+      "demo": false,
+      "evidence_status": "independent-professional-extension"
+    },
+    {
+      "id": "ridge",
+      "name_zh": "山脊密度图",
+      "name_en": "Ridgeline plot",
+      "family": "distribution",
+      "question": "多个商品群体的分布形状如何？",
+      "fields": [
+        "group",
+        "value"
+      ],
+      "encoding": "叠放密度曲线=分布形状",
+      "interaction": [
+        "组别聚焦"
+      ],
+      "annotation": "共同尺度与样本数",
+      "risk": "重叠过多会遮挡，密度不代表规模",
+      "renderers": [
+        "D3",
+        "Observable Plot"
+      ],
+      "demo": false,
+      "evidence_status": "independent-professional-extension"
+    },
+    {
+      "id": "cohort-heatmap",
+      "name_zh": "Cohort 留存热力图",
+      "name_en": "Cohort retention",
+      "family": "retail",
+      "question": "不同开店批次第N月留存如何？",
+      "fields": [
+        "cohort",
+        "age",
+        "retention_rate",
+        "base_count"
+      ],
+      "encoding": "行=批次；列=生命周期；颜色=留存",
+      "interaction": [
+        "批次切换",
+        "异常解释"
+      ],
+      "annotation": "基期样本数与末端空值",
+      "risk": "尚未发生的月份标 N/A，不可当作零留存",
+      "renderers": [
+        "D3",
+        "ECharts"
+      ],
+      "demo": true,
+      "evidence_status": "independent-professional-extension"
+    },
+    {
+      "id": "inventory-heatmap",
+      "name_zh": "商品仓库存风险矩阵",
+      "name_en": "Stock risk heatmap",
+      "family": "retail",
+      "question": "哪些商品仓连续缺货？",
+      "fields": [
+        "warehouse",
+        "goods",
+        "risk_score"
+      ],
+      "encoding": "行=仓；列=商品；颜色=风险级别",
+      "interaction": [
+        "仓品下钻",
+        "阈值"
+      ],
+      "annotation": "异常级别与最近日期",
+      "risk": "风险综合分需公开权重；缺失不能涂成正常",
+      "renderers": [
+        "ECharts",
+        "AntV G2"
+      ],
+      "demo": false,
+      "evidence_status": "independent-professional-extension"
+    },
+    {
+      "id": "geo-density",
+      "name_zh": "门店空间密度图",
+      "name_en": "Store density map",
+      "family": "geospatial",
+      "question": "门店是否聚集、哪些区域覆盖薄弱？",
+      "fields": [
+        "longitude",
+        "latitude",
+        "weight"
+      ],
+      "encoding": "地图坐标+点密度/聚合",
+      "interaction": [
+        "圈选",
+        "缩放",
+        "地理筛选"
+      ],
+      "annotation": "覆盖半径或距离阈值",
+      "risk": "经纬度隐私与聚合、投影和面积偏差需注意",
+      "renderers": [
+        "MapLibre",
+        "deck.gl"
+      ],
+      "demo": false,
+      "evidence_status": "independent-professional-extension"
+    },
+    {
+      "id": "flow-network",
+      "name_zh": "供应链关系网络",
+      "name_en": "Supply network",
+      "family": "flow",
+      "question": "供应商—仓—门店间有哪些关键风险链路？",
+      "fields": [
+        "node_id",
+        "node_type",
+        "source",
+        "target",
+        "weight"
+      ],
+      "encoding": "节点角色=类型；边宽=强度",
+      "interaction": [
+        "节点追踪",
+        "异常过滤"
+      ],
+      "annotation": "关键节点与边的风险",
+      "risk": "不同关系的边权不可直接比较",
+      "renderers": [
+        "AntV G6",
+        "D3"
+      ],
+      "demo": false,
+      "evidence_status": "independent-professional-extension"
+    },
+    {
+      "id": "uncertainty-band",
+      "name_zh": "置信区间趋势图",
+      "name_en": "Uncertainty band",
+      "family": "distribution",
+      "question": "预测趋势的不确定性有多大？",
+      "fields": [
+        "date",
+        "estimate",
+        "lower",
+        "upper"
+      ],
+      "encoding": "中心线=预测；带状区间=预测区间",
+      "interaction": [
+        "预测期筛选",
+        "情景切换"
+      ],
+      "annotation": "区间定义和覆盖率",
+      "risk": "置信区间与预测区间不同，不可混称",
+      "renderers": [
+        "D3",
+        "ECharts"
+      ],
+      "demo": false,
+      "evidence_status": "independent-professional-extension"
+    },
+    {
+      "id": "seasonal-matrix",
+      "name_zh": "季节性月份矩阵",
+      "name_en": "Seasonal matrix",
+      "family": "retail",
+      "question": "哪些品类在不同月份呈季节性峰值？",
+      "fields": [
+        "year",
+        "month",
+        "category",
+        "metric"
+      ],
+      "encoding": "行=年份；列=月份；色阶=指标",
+      "interaction": [
+        "指标切换",
+        "品类筛选"
+      ],
+      "annotation": "同期对照与重要事件",
+      "risk": "未做工作日、门店数标准化时不能直接跨期比较",
+      "renderers": [
+        "D3",
+        "ECharts"
+      ],
+      "demo": false,
+      "evidence_status": "independent-professional-extension"
+    },
+    {
+      "id": "supply-otif",
+      "name_zh": "履约双指标图",
+      "name_en": "OTIF performance",
+      "family": "retail",
+      "question": "按时率与足量率是否同时达标？",
+      "fields": [
+        "warehouse",
+        "on_time_rate",
+        "in_full_rate",
+        "volume"
+      ],
+      "encoding": "X=及时率；Y=足量率；大小=订单量",
+      "interaction": [
+        "仓库筛选",
+        "异常钻取"
+      ],
+      "annotation": "目标象限与样本数",
+      "risk": "业务 OTIF 同时满足两个条件，不能只将两率简单相乘",
+      "renderers": [
+        "ECharts",
+        "visx"
+      ],
+      "demo": false,
+      "evidence_status": "independent-professional-extension"
+    }
+  ]
+}

@@ -14,7 +14,8 @@
   "description": "把 SVG 图形、实时筛选、滚动式数据叙事和可访问数据表组合成中文分析体验。",
   "verification_notes": [
     "未直接查看原模板截图或源码",
-    "色彩/字体/布局是原创建议，非原网页实测"
+    "色彩/字体/布局是原创建议，非原网页实测",
+    "v1.1 新增 30 种独立专业图表配方，其中 15 种有原创 SVG 演示；并非原 Google AI Studio 页面实测图表"
   ],
   "design_pillars": [
     {
@@ -91,5 +92,10 @@
     "tables": "TanStack Table / AntV S2",
     "scroll": "IntersectionObserver or optional GSAP",
     "backend": "API + StarRocks aggregated/paginated data"
-  }
+  },
+  "professional_chart_catalog": "charts/catalog.json",
+  "professional_chart_examples": "assets/pro-chart-gallery.html",
+  "independent_professional_charts": 30,
+  "demonstrated_svg_charts": 15,
+  "verified_original_patterns": []
 }

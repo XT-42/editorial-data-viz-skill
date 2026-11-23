@@ -1,14 +1,27 @@
-# 中文编辑式数据可视化 Skill（可扩展模板库）
+# 中文编辑式数据可视化 Skill v1.1 · 专业图形系统 + 可扩展模板库
 
 本 Skill 将 Google AI Studio “Interactive Data Dashboard” 所讨论的四个理念——**SVG 图形、实时筛选、滚动叙事、可访问的数据表**——转化为可执行的中文前端设计工作流。
 
 > 重要：T001 是根据**本次对话中提炼的设计理念**建立的原创风格方案，**未验证原网页截图、源码或精确图表种类**。所给颜色、字体、布局是本 Skill 的推荐方案，不代表 Google 官方原始配置。
+
+## v1.1 新增：专业图形设计资产
+
+原有 T001 主要解决版式、叙事和筛选，专业图形种类不足。v1.1 引入独立的 `charts/` 层：
+
+- **30 种图表配方**：完整目录在 [charts/catalog.json](charts/catalog.json)，每种带字段、视觉编码、交互、图上注释、风险、实现技术与证据状态。
+- **15 个可运行的原创 SVG 演示**：双击打开 [assets/pro-chart-gallery.html](assets/pro-chart-gallery.html)，可以中文搜索、按类别筛选、切换主题，并查看每幅图的数据契约。
+- **专业规范**：[references/07-专业图表图谱.md](references/07-专业图表图谱.md)、[references/08-图形工程契约.md](references/08-图形工程契约.md)、[references/10-图表计算配方.md](references/10-图表计算配方.md)。
+- **来源分级**：[references/09-原模板核验记录.md](references/09-原模板核验记录.md)明确哪些能力有来源、哪些图是后加的专业扩展。未访问到原页面实际图形，不能声称精确学习了 Google 原始图表形态。
+
+推荐调用：`$editorial-data-viz 使用 T001 + charts/catalog.json 中的 waterfall、dumbbell、cohort-heatmap，为采购业务开发中文图表`。
 
 ## 文件结构
 
 ```text
 editorial-data-viz-skill/
 ├── SKILL.md                         # 调用规则、流程、边界
+├── charts/catalog.json              # 30 种专业图表配方
+├── charts/README.md                 # 选型原则与图表目录
 ├── README.md                        # 使用与安装
 ├── agents/openai.yaml               # 显示名称与默认调用语
 ├── templates/
@@ -21,7 +34,8 @@ editorial-data-viz-skill/
 ├── scripts/
 │   ├── add_template.py              # 新增模板、自动占用下个槽位
 │   └── validate_skill.py            # 校验完整性
-└── assets/editorial-demo.html       # 本地可打开的原创交互示例
+├── assets/editorial-demo.html       # 基础编辑式叙事示例
+└── assets/pro-chart-gallery.html    # 15 种专业 SVG 图形演示
 ```
 
 ## 如何安装/调用
@@ -55,7 +69,7 @@ python scripts/validate_skill.py
 
 ## 演示
 
-直接双击打开 `assets/editorial-demo.html`，无需安装依赖。演示的是零售分析场景，所有数值均为模拟数据，用于验证理念而非展示模板原站。
+直接双击打开 `assets/editorial-demo.html`（编辑式叙事）或 `assets/pro-chart-gallery.html`（15 种专业 SVG 图形），无需安装依赖。演示均为原创模拟数据，而非 Google 模板原站复刻。
 
 ## 规范与溯源
 

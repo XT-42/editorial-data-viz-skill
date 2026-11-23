@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>专业数据可视化图形画廊 · Editorial Data Viz v1.1</title>
+<style>
+:root{--canvas:#f6f5f0;--paper:#fff;--ink:#1b2828;--muted:#6b7776;--line:#dce2df;--accent:#176f70;--accent2:#b76243;--soft:#e3f0ec}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{background:var(--canvas);color:var(--ink);font:14px/1.65 system-ui,"PingFang SC","Microsoft YaHei",sans-serif;margin:0}
+.container{max-width:1460px;padding:0 30px;margin:auto}a{color:inherit}header{padding:26px 0 34px;border-bottom:1px solid var(--line)}
+.header-top{display:flex;justify-content:space-between;gap:12px}.eyebrow{font:700 11px/1.4 ui-monospace,monospace;color:var(--accent);letter-spacing:.16em}
+h1{font-size:clamp(32px,4.4vw,58px);font-weight:660;line-height:1.15;letter-spacing:-.045em;margin:27px 0 12px}
+h1 span{color:var(--accent)}p{color:var(--muted);margin:8px 0;max-width:800px}
+.count{font:700 42px ui-monospace,monospace;display:block}
+.note{border-left:3px solid var(--accent);background:var(--soft);padding:10px 15px;margin-top:22px;max-width:1000px}
+.toolbar{position:sticky;top:0;background:rgba(246,245,240,.97);backdrop-filter:blur(14px);z-index:5;padding:15px 0;border-bottom:1px solid var(--line);display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+input,select,button{font:inherit;border:1px solid var(--line);border-radius:5px;padding:9px 12px;background:white;color:var(--ink)}
+input{min-width:200px;flex:1;max-width:340px}
+button{cursor:pointer}button:hover{border-color:var(--accent)}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.meta{margin-left:auto;color:var(--muted);font:12px ui-monospace,monospace}
+section.intro{padding:27px 0 8px;display:flex;justify-content:space-between;gap:20px;align-items:end}.intro h2{font-size:22px;margin:5px 0}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px;padding:16px 0 52px}
+.card{min-width:0;background:var(--paper);border:1px solid var(--line);padding:17px 17px 14px;display:flex;flex-direction:column}
+.card-head{display:flex;justify-content:space-between;align-items:start;gap:6px}
+.serial{font:700 11px ui-monospace,monospace;color:var(--accent)}
+.card h3{font-size:18px;margin:10px 0 2px;letter-spacing:-.01em}.card p{font-size:12px;min-height:25px;margin:3px 0 0}
+svg{width:100%;height:auto;display:block;overflow:visible;margin:12px 0 6px;background:#fff}
+.card-foot{border-top:1px solid var(--line);padding-top:10px;margin-top:auto;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.tag{font:11px ui-monospace,monospace;color:var(--muted);white-space:nowrap}
+.inspect{font-size:12px;background:var(--soft);border-color:transparent;color:var(--accent);font-weight:650}
+.detail{border-top:1px solid var(--line);padding:35px 0 80px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(260px,.85fr);gap:50px}
+.detail h2{font-size:30px;margin:8px 0}.facts{display:grid;grid-template-columns:120px minmax(0,1fr);gap:9px 16px;margin-top:26px}.facts dt{color:var(--muted)}.facts dd{margin:0}
+pre{white-space:pre-wrap;word-break:break-all;background:#172829;color:#e1f0e9;padding:16px;border-radius:6px}
+.data-table{overflow:auto}table{width:100%;border-collapse:collapse;margin:16px 0}th,td{text-align:left;border-bottom:1px solid var(--line);padding:10px 8px;vertical-align:top}
+footer{border-top:1px solid var(--line);padding:25px 0 55px;color:var(--muted)}
+@media(max-width:1100px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:720px){.container{padding:0 18px}.cards,.detail{grid-template-columns:1fr}.toolbar{position:static}.meta{width:100%}.card p{min-height:unset}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style></head>
+<body><header><div class="container"><div class="header-top"><b>DATA / EDITORIAL</b><span class="eyebrow">PROFESSIONAL CHART ATLAS · 01/15</span></div>
+<h1>不只是好看，更要<span>解释数据。</span></h1><p>专业 SVG 图形画廊：比较、趋势、异常、分解、流向、分布与留存。每张图均为原创绘制的独立图形，不是普通折线图的换皮。</p>
+<div class="note"><b>来源说明：</b>本画廊为 Skill v1.1 的原创专业扩展，所有数值均为模拟示意，<strong>不是 Google AI Studio 原模板已核验图形或页面截图</strong>。</div>
+</div></header>
+<div class="container"><div class="toolbar">
+<label for="search">搜索</label><input id="search" placeholder="名称 / 业务问题 / 图表 ID" aria-label="搜索图表">
+<label for="family">分类</label><select id="family"><option value="">全部分类</option><option value="趋势">趋势</option><option value="比较">比较</option><option value="分解">分解</option><option value="流向">流向</option><option value="结构">结构</option><option value="分布">分布</option><option value="零售">零售</option></select>
+<label for="theme">配色</label><select id="theme"><option value="teal">墨绿编辑式</option><option value="rust">陶土编辑式</option></select>
+<button id="clear" type="button">重置</button><span class="meta" id="visible-count" aria-live="polite">15 / 15 DEMOS</span>
+</div><section class="intro"><div><span class="eyebrow">01 / DRAWINGS</span><h2>专业图形 · 15 个可运行示例</h2></div><p>图形语义和适用业务保持独立，色彩主题可切换。</p></section>
+<div id="cards" class="cards"></div>
+<section class="detail" id="detail" tabindex="-1"><div><span class="eyebrow">02 / CHART SPECIFICATION</span><h2 id="detail-title">选择图形查看配方</h2><p id="detail-desc">每张图都会给出字段、使用场景、易错口径。选中任意“查看设计配方”。</p><dl class="facts" id="facts"></dl></div><div class="data-table"><span class="eyebrow">DATA CONTRACT</span><h2>数据与编码说明</h2><table><thead><tr><th>字段</th><th>意义</th></tr></thead><tbody id="field-table"></tbody></table><div id="spec-snippet"></div></div></section>
+<footer>Editorial Data Viz · v1.1 · 原创 SVG 画廊 · 模拟数据 · 30 个图表配方中 15 个已实现独立可视化演示。<br>使用本文件无需外部 CDN。详细图表注册表位于 <code>charts/catalog.json</code>。</footer></div>
+<script>
+(function(){
+'use strict';
+const DEMO_IDS=["annotated-line","small-multiples","slopegraph","bump-chart","calendar-heatmap","control-chart","dumbbell","bullet","diverging-bars","waterfall","sankey","treemap","scatter-quadrant","boxplot","cohort-heatmap"];
+const items=[
+["annotated-line","带标注的趋势图","趋势","指标的关键变化发生在哪里？","日期,销售指数","显示拐点与事件，不能混淆同比与环比"],
+["small-multiples","小倍数趋势图","趋势","各区域是否呈现相同的增长节奏？","日期,区域,销售指数","小倍数间须使用相同数值域"],
+["slopegraph","坡度图","比较","两期品类指标发生什么变化？","品类,期初值,期末值","不同对象需要统一量纲"],
+["bump-chart","名次变化图","趋势","重点商品名次如何跨月变化？","月份,商品,名次","名次不等于销售额与份额"],
+["calendar-heatmap","日历热力图","趋势","哪些日期异常集中？","日期,指标","零、缺失、未发生须区别编码"],
+["control-chart","过程控制图","趋势","哪些时点超出统计波动范围？","日期,值,CL,UCL,LCL","模拟控制限，实际使用需统计过程推导"],
+["dumbbell","哑铃图","比较","哪些省份两期差距最大？","省份,前期,本期","按差额排序，保证同样本同口径"],
+["bullet","子弹图","比较","各仓实际达成离目标有多远？","仓,实际,目标","目标值与实际值必须同单位"],
+["diverging-bars","正负发散图","比较","哪些品类贡献为正、哪些为负？","品类,偏差","必须以 0 为基线"],
+["waterfall","瀑布增量分解","分解","总销售额变动由哪些因素构成？","步骤,变化值,合计值","各贡献项须无重叠且相加守恒"],
+["sankey","桑基流向图","流向","货品在不同环节的流量如何分配？","源,目标,流量","这里只演示简化单层流向，正式版需核验守恒"],
+["treemap","品类矩形树图","结构","各品类的规模结构如何？","品类,销售额","矩形面积对应规模，不能绘制负值"],
+["scatter-quadrant","四象限散点图","分布","销量和毛利率如何组合？","商品,销量,毛利率","关联关系不是因果"],
+["boxplot","门店分布箱线图","分布","不同区域的门店指标离散程度如何？","区域,Q1,中位数,Q3,下须,上须","明确分位算法、须线规则和样本数"],
+["cohort-heatmap","队列留存热力图","零售","不同开店批次留存如何衰减？","批次,月龄,留存率,样本量","未来月份应为空，不可计算为零"]
+];
+const $=id=>document.getElementById(id);
+let theme='teal';
+const C=()=>({ink:'#20302d',muted:'#6c7975',grid:'#e5ece8',accent:theme==='teal'?'#176f70':'#9d553d',accent2:theme==='teal'?'#c96d4b':'#526f88',pale:theme==='teal'?'#e4f1ed':'#f3e7de',light:'#f0f3ef',white:'#ffffff'});
+const esc=s=>String(s).replace(/[&<>"]/g,k=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[k]));
+function el(tag,attrs,inside){return '<'+tag+' '+Object.entries(attrs||{}).map(([k,v])=>k+'="'+esc(v)+'"').join(' ')+'>'+(inside||'')+'</'+tag+'>'}
+function rect(x,y,w,h,fill,extra){return el('rect',Object.assign({x,y,width:Math.max(0,w),height:Math.max(0,h),fill,rx:1},extra||{}))}
+function line(x1,y1,x2,y2,col,width=1,dash=''){return el('line',{x1,y1,x2,y2,stroke:col,'stroke-width':width,'stroke-dasharray':dash})}
+function circle(x,y,r,fill,title){return el('circle',{cx:x,cy:y,r,fill},title?el('title',{},esc(title)):'')}
+function txt(x,y,s,size=12,fill,anchor='start',weight='500'){return el('text',{x,y,fill:fill||C().ink,'font-size':size,'text-anchor':anchor,'font-weight':weight,'font-family':'system-ui, sans-serif'},esc(s))}
+function path(d,color,width=2,fill='none'){return el('path',{d,stroke:color,'stroke-width':width,fill,'stroke-linejoin':'round','stroke-linecap':'round'})}
+function wrap(name,content){return '<svg viewBox="0 0 450 238" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="'+esc(name)+'，模拟数据">'+el('title',{},esc(name+'，模拟数据'))+el('desc',{},'关键数据口径请查看图形配方。')+content+'</svg>'}
+function axis(){let c=C();return line(36,204,424,204,c.grid)+line(36,30,36,204,c.grid)}
+function poly(values,x0=42,y0=28,w=372,h=165,min,max,color){min=min===undefined?Math.min(...values):min;max=max===undefined?Math.max(...values):max;return path(values.map((v,i)=>(i?'L':'M')+(x0+w*i/(values.length-1))+','+(y0+h*(max-v)/(max-min||1))).join(' '),color||C().accent,2.6)}
+function annotated(){let c=C(),v=[93,99,101,104,110,105,116,122,118,127,135,144],s=axis()+line(36,132,423,132,c.grid,1,'3 4')+poly(v,42,28,372,165,85,148);
+v.forEach((n,i)=>{if(i===5||i===11){let x=42+372*i/11,y=28+165*(148-n)/63;s+=circle(x,y,5,i===11?c.accent:c.accent2,n+' 指数')+txt(x,y-13,n,12,c.ink,'middle','700')}});
+s+=txt(41,222,'1月')+txt(412,222,'12月',11,c.muted,'end')+txt(410,40,'指数',11,c.muted,'end');return wrap('注释趋势图',s)}
+function multiples(){let c=C(),series=[[16,18,20,19,22,25],[18,19,18,22,22,24],[14,15,19,17,18,22],[21,22,21,20,23,24]],names=['华东','华南','华中','华北'],s='';
+series.forEach((arr,i)=>{let x=16+(i%2)*221,y=11+Math.floor(i/2)*112;s+=txt(x+12,y+18,names[i],12,c.ink)+rect(x,y+30,201,73,c.light);s+=poly(arr,x+14,y+38,176,52,12,27,i===2?c.accent2:c.accent)});return wrap('小倍数趋势图',s)}
+function slope(){let c=C(),rows=[['水饮',72,90],['零食',83,76],['乳品',55,69],['日化',62,53]],s=line(105,22,105,216,c.grid)+line(343,22,343,216,c.grid)+txt(105,16,'前期',11,c.muted,'middle')+txt(343,16,'本期',11,c.muted,'middle');
+rows.forEach((r,i)=>{let y1=208-r[1]*1.6,y2=208-r[2]*1.6;s+=path('M105,'+y1+' L343,'+y2,i===0?c.accent:c.muted,i===0?3:1.7);s+=circle(105,y1,4,c.accent)+circle(343,y2,4,c.accent)+txt(96,y1+4,r[0]+' '+r[1],11,c.ink,'end')+txt(352,y2+4,r[2],11,c.ink)});return wrap('坡度图',s)}
+function bump(){let c=C(),series=[[3,2,1,1,2,1],[1,1,3,2,1,2],[2,3,2,4,3,3],[4,5,4,3,4,5],[5,4,5,5,5,4]],s='',cols=[c.accent,c.accent2,'#72948a','#b4a883','#b4bdba'];
+for(let i=1;i<=5;i++)s+=line(50,28+i*32,407,28+i*32,c.grid)+txt(40,33+i*32,i,11,c.muted,'end');
+series.forEach((v,j)=>{s+=poly(v,60,56,324,128,5,1,cols[j]);v.forEach((n,i)=>s+=circle(60+i*324/5,56+128*(5-n)/4,3.5,cols[j]));s+=txt(392,57+128*(5-v[5])/4,'S'+(j+1),11,cols[j])});return wrap('排名变化图',s)}
+function calendar(){let c=C(),s=txt(20,15,'2026 · Q1 样例',11,c.muted);for(let w=0;w<14;w++){for(let d=0;d<7;d++){let v=(w*9+d*11+w*d*3)%100;let col=v<18?'#f0f2ee':v<40?'#c2ded6':v<65?'#77b7aa':v<82?c.accent:c.accent2;s+=rect(25+w*29,30+d*24,23,18,col)}}s+=txt(25,221,'低',11,c.muted)+rect(48,210,16,10,'#f0f2ee')+rect(69,210,16,10,'#c2ded6')+rect(90,210,16,10,'#77b7aa')+rect(111,210,16,10,c.accent)+txt(132,221,'高',11,c.muted);return wrap('日历热力图',s)}
+function control(){let c=C(),v=[100,103,99,104,102,98,97,106,110,123,105,101,99,95,102,100],s=axis(),min=80,max=130,Y=n=>28+167*(max-n)/(max-min);
+[88,103,118].forEach((n,i)=>{s+=line(40,Y(n),415,Y(n),i===1?c.accent:c.accent2,1.4,'4 4')+txt(417,Y(n)-4,['LCL','CL','UCL'][i],11,c.muted,'end')});
+s+=poly(v,42,28,370,167,min,max,c.accent);v.forEach((n,i)=>{if(n>118||n<88)s+=circle(42+370*i/15,Y(n),6,c.accent2)+txt(42+370*i/15,Y(n)-12,n,11,c.ink,'middle')});return wrap('控制图',s)}
+function dumbbell(){let c=C(),rows=[['华东',66,88],['华南',81,75],['华中',54,70],['华北',73,79],['西南',48,60]],s='';
+rows.forEach((r,i)=>{let y=35+i*40,x1=100+r[1]*2.9,x2=100+r[2]*2.9;s+=txt(60,y+4,r[0],12,c.ink,'end')+line(x1,y,x2,y,c.muted,3)+circle(x1,y,5,c.accent2,r[0]+'前期 '+r[1])+circle(x2,y,5,c.accent,r[0]+'本期 '+r[2])});s+=circle(105,230,4,c.accent2)+txt(114,234,'前期',10,c.muted)+circle(165,230,4,c.accent)+txt(174,234,'本期',10,c.muted);return wrap('哑铃对比图',s)}
+function bullet(){let c=C(),rows=[['仓 A',76,85],['仓 B',90,83],['仓 C',67,80],['仓 D',98,92]],s='';
+rows.forEach((r,i)=>{let y=35+i*49;s+=txt(58,y+12,r[0],12,c.ink,'end')+rect(75,y,338,24,c.light)+rect(75,y,338*.7,24,'#dce7e2')+rect(75,y+5,338*r[1]/100,14,c.accent)+line(75+338*r[2]/100,y-5,75+338*r[2]/100,y+27,c.accent2,3)+txt(415,y+17,r[1]+'%',12,c.ink,'end')});return wrap('目标子弹图',s)}
+function diverging(){let c=C(),rows=[['水饮',18],['零食',-9],['乳品',13],['日化',-15],['糕点',7],['冷饮',-11]],s=line(231,20,231,226,c.ink,1.4);
+rows.forEach((r,i)=>{let y=25+i*35,w=Math.abs(r[1])*7;s+=txt(70,y+11,r[0],12,c.ink,'end')+rect(r[1]<0?231-w:231,y, w,17,r[1]<0?c.accent2:c.accent)+txt(r[1]<0?225-w:237+w,y+12,(r[1]>0?'+':'')+r[1]+'%',11,c.ink,r[1]<0?'end':'start')});return wrap('正负发散条形图',s)}
+function waterfall(){let c=C(),labels=['基期','门店','同店','新品','折损','本期'],vals=[200,40,-22,18,-13,223],running=200,min=0,max=270,s='';
+vals.forEach((v,i)=>{let x=22+i*70,w=45,y0,y1,col;if(i===0||i===5){y0=215-vals[i]/max*176;y1=215;col=c.ink}else{let start=running;running+=v;y0=215-Math.max(start,running)/max*176;y1=215-Math.min(start,running)/max*176;col=v>=0?c.accent:c.accent2}s+=rect(x,y0,w,y1-y0,col)+txt(x+w/2,225,labels[i],11,c.muted,'middle')+txt(x+w/2,Math.max(12,y0-8),(i===0||i===5?'':v>0?'+':'')+v,12,c.ink,'middle')});return wrap('销售增量瀑布图',s)}
+function sankey(){let c=C(),s='',left=[['供方 A',60,55],['供方 B',60,153]],right=[['仓 1',350,32],['仓 2',350,116],['仓 3',350,193]];
+s+=path('M85,64 C185,64 235,45 350,45',c.accent,30);s+=path('M85,82 C185,82 230,129 350,129',c.accent,15);s+=path('M85,93 C185,93 230,202 350,202',c.accent,9);s+=path('M85,161 C170,161 230,65 350,65',c.accent2,13);s+=path('M85,171 C170,171 230,151 350,151',c.accent2,13);s+=path('M85,184 C170,184 230,217 350,217',c.accent2,13);
+left.forEach(([name,x,y],i)=>{s+=rect(x,y,21,58,i===0?c.accent:c.accent2)+txt(x+10,y-9,name,12,c.ink,'middle')});
+right.forEach(([name,x,y])=>{s+=rect(x,y,22,52,'#385c5b')+txt(x+30,y+27,name,11,c.ink)});
+return wrap('简化桑基流向图',s)}
+function treemap(){let c=C(),s='';[['水饮',45,20,23,180,188,c.accent],['零食',25,200,23,100,188,'#729b8f'],['乳品',15,300,23,120,94,c.accent2],['日化',10,300,117,80,94,'#a9bcb5'],['其他',5,380,117,40,94,'#d8dfd7']].forEach(([name,value,x,y,w,h,color])=>{s+=rect(x,y,w-2,h-2,color)+txt(x+7,y+22,name,12,color===c.accent?'#fff':c.ink)+txt(x+7,y+42,value+'%',11,color===c.accent?'#fff':c.ink)});return wrap('品类矩形树图',s)}
+function scatter(){let c=C(),s=axis()+line(230,24,230,204,c.grid,1.4,'4 4')+line(35,120,422,120,c.grid,1.4,'4 4')+txt(235,38,'高毛利 × 高销量',10,c.muted);
+for(let i=0;i<48;i++){let x=47+((i*67+i*i*3)%355),y=37+((i*37+i*i*5)%145),r=2.8+i%4;s+=circle(x,y,r,i%9===0?c.accent2:c.accent,'商品样本 '+(i+1))}s+=txt(425,226,'销量 →',11,c.muted,'end')+txt(30,20,'毛利率 ↑',11,c.muted);return wrap('四象限散点图',s)}
+function boxplot(){let c=C(),rows=[['华东',36,54,67,85,110],['华南',29,48,59,74,99],['华中',41,61,77,96,120],['西南',24,38,55,68,97]],s='';let X=n=>62+n*2.85;
+rows.forEach((r,i)=>{let y=34+i*47;s+=txt(51,y+4,r[0],12,c.ink,'end')+line(X(r[1]),y,X(r[5]),y,c.ink,1.4)+line(X(r[1]),y-11,X(r[1]),y+11,c.ink)+line(X(r[5]),y-11,X(r[5]),y+11,c.ink)+rect(X(r[2]),y-12,X(r[4])-X(r[2]),24,c.pale,{stroke:c.accent,'stroke-width':1.3})+line(X(r[3]),y-12,X(r[3]),y+12,c.accent,2.5)});
+s+=txt(62,226,'0',11,c.muted)+txt(400,226,'120',11,c.muted,'end');return wrap('分布箱线图',s)}
+function cohort(){let c=C(),s='',values=[[100,82,68,61,56,50],[100,78,70,62,53,null],[100,84,72,65,null,null],[100,88,76,null,null,null],[100,79,null,null,null,null],[100,null,null,null,null,null]];
+values.forEach((row,i)=>{s+=txt(51,45+i*29,'2026-'+String(i+1).padStart(2,'0'),10,c.muted,'end');row.forEach((v,j)=>{let x=61+j*59,y=29+i*29,fill=v===null?'#f1f2ef':v>90?c.accent:v>75?'#5b9c91':v>60?'#a7cbc3':'#e6e6dd';s+=rect(x,y,54,25,fill)+txt(x+27,y+17,v===null?'—':v+'%',10,v>90?'#fff':c.ink,'middle')})});s+=txt(61,222,'批次 / 月龄',11,c.muted)+txt(412,222,'第 0–5 月',11,c.muted,'end');return wrap('Cohort 留存热力图',s)}
+const DRAW={"annotated-line":annotated,"small-multiples":multiples,"slopegraph":slope,"bump-chart":bump,"calendar-heatmap":calendar,"control-chart":control,"dumbbell":dumbbell,"bullet":bullet,"diverging-bars":diverging,"waterfall":waterfall,"sankey":sankey,"treemap":treemap,"scatter-quadrant":scatter,"boxplot":boxplot,"cohort-heatmap":cohort};
+function render(){
+ let q=$('search').value.trim().toLowerCase(),fam=$('family').value, list=items.filter(a=>(!fam||a[2]===fam)&&(!q||a.join(' ').toLowerCase().includes(q)));
+ $('visible-count').textContent=list.length+' / '+items.length+' DEMOS';
+ $('cards').innerHTML=list.map(a=>{let i=DEMO_IDS.indexOf(a[0]);return '<article class="card"><div class="card-head"><span class="serial">'+String(i+1).padStart(2,'0')+' / '+String(items.length).padStart(2,'0')+'</span><span class="tag">'+esc(a[2])+'</span></div><h3>'+esc(a[1])+'</h3><p>'+esc(a[3])+'</p>'+DRAW[a[0]]()+'<div class="card-foot"><span class="tag">'+esc(a[0])+'</span><button type="button" class="inspect" data-id="'+esc(a[0])+'">查看设计配方</button></div></article>'}).join('')||'<p>没有匹配图表，试试重置筛选。</p>';
+ document.querySelectorAll('.inspect').forEach(btn=>btn.addEventListener('click',()=>inspect(btn.dataset.id)));
+}
+function inspect(id){let a=items.find(v=>v[0]===id);if(!a)return;
+ $('detail-title').textContent=a[1];$('detail-desc').textContent=a[3];
+ let rows=[['图形 ID',a[0]],['类别',a[2]],['核心编码',a[4]],['重要口径限制',a[5]],['数据来源','原创模拟数据，不是原模板复制']];
+ $('facts').innerHTML=rows.map(r=>'<dt>'+esc(r[0])+'</dt><dd>'+esc(r[1])+'</dd>').join('');
+ $('field-table').innerHTML=a[4].split(',').map((f,i)=>'<tr><td><code>'+esc(f)+'</code></td><td>'+(i===0?'维度或分组':'指标或关联字段')+'</td></tr>').join('');
+ $('spec-snippet').innerHTML='<p>开发前请核对字段粒度、分母、缺失值和业务阈值。完整定义可在 <code>charts/catalog.json</code> 检索。</p><pre>chart_id: '+esc(a[0])+'\nquestion: '+esc(a[3])+'\nrenderer: SVG / D3 / visx / ECharts\nsource: MOCK</pre>';
+ $('detail').focus({preventScroll:true});$('detail').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth',block:'start'});
+}
+$('search').addEventListener('input',render);$('family').addEventListener('change',render);
+$('theme').addEventListener('change',function(){theme=this.value;document.documentElement.style.setProperty('--accent',C().accent);document.documentElement.style.setProperty('--accent2',C().accent2);document.documentElement.style.setProperty('--soft',C().pale);render()});
+$('clear').addEventListener('click',function(){$('search').value='';$('family').value='';$('theme').value='teal';$('theme').dispatchEvent(new Event('change'));render()});
+render();inspect('waterfall');
+})();
+</script></body></html>
