@@ -1,0 +1,17 @@
+{
+  "id": "Txxx",
+  "slug": "replace-me",
+  "name": "新模板名",
+  "aliases": [],
+  "status": "draft",
+  "evidence_status": "user-specified",
+  "source_url": "",
+  "description": "",
+  "design_pillars": [],
+  "tokens": {},
+  "chart_patterns": [],
+  "interaction_patterns": [],
+  "responsive_rules": [],
+  "implementation": {},
+  "verification_notes": []
+}

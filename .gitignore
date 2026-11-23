@@ -1,0 +1,20 @@
+# Python cache / local development
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# Editors and operating systems
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Generated archives and temporary files
+*.zip
+*.tmp
+*.log

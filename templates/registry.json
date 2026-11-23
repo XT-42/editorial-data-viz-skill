@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "default_template_id": "T001",
+  "templates": [
+    {
+      "id": "T001",
+      "slug": "google-ai-studio-interactive-dashboard",
+      "name": "Interactive Editorial Dashboard｜中文编辑式数据仪表板",
+      "aliases": [
+        "interactive-data-dashboard",
+        "google-ai-studio",
+        "编辑式数据看板",
+        "SVG 滚动叙事"
+      ],
+      "status": "active",
+      "evidence_status": "derived-from-conversation",
+      "path": "templates/google-ai-studio-interactive-dashboard",
+      "source_url": "https://aistudio.google.com/apps/bundled/interactive-data-dashboard?showPreview=true&showAssistant=true&remix=true"
+    }
+  ],
+  "reserved_slots": [
+    "T002",
+    "T003",
+    "T004"
+  ]
+}

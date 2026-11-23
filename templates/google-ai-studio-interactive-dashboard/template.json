@@ -1,0 +1,95 @@
+{
+  "id": "T001",
+  "slug": "google-ai-studio-interactive-dashboard",
+  "name": "Interactive Editorial Dashboard｜中文编辑式数据仪表板",
+  "aliases": [
+    "interactive-data-dashboard",
+    "google-ai-studio",
+    "编辑式数据看板",
+    "SVG 滚动叙事"
+  ],
+  "status": "active",
+  "evidence_status": "derived-from-conversation",
+  "source_url": "https://aistudio.google.com/apps/bundled/interactive-data-dashboard?showPreview=true&showAssistant=true&remix=true",
+  "description": "把 SVG 图形、实时筛选、滚动式数据叙事和可访问数据表组合成中文分析体验。",
+  "verification_notes": [
+    "未直接查看原模板截图或源码",
+    "色彩/字体/布局是原创建议，非原网页实测"
+  ],
+  "design_pillars": [
+    {
+      "id": "responsive-svg",
+      "zh": "响应式 SVG 图形",
+      "goal": "支持可解释、精细标注的矢量图表"
+    },
+    {
+      "id": "live-filters",
+      "zh": "实时交互筛选",
+      "goal": "统一状态驱动 KPI、图表与数据表"
+    },
+    {
+      "id": "scrolltelling",
+      "zh": "滚动式数据叙事",
+      "goal": "逐章引导从现象到证据"
+    },
+    {
+      "id": "accessible-tables",
+      "zh": "可访问数据表",
+      "goal": "提供图表数值的核验路径"
+    }
+  ],
+  "tokens": {
+    "mode": "original-paper-editorial-recommendation",
+    "colors": {
+      "canvas": "#F7F6F2",
+      "surface": "#FFFFFF",
+      "ink": "#20272B",
+      "muted": "#667176",
+      "border": "#D9DEDD",
+      "accent": "#176F70",
+      "accentSoft": "#E3F0EC",
+      "warning": "#C56C41"
+    },
+    "spacing_base_px": 8,
+    "max_content_width_px": 1440,
+    "font_stack_zh": "system-ui, -apple-system, \"PingFang SC\", \"Microsoft YaHei\", sans-serif",
+    "font_stack_numbers": "ui-monospace, SFMono-Regular, Consolas, monospace",
+    "chapter_heading_px": [
+      40,
+      64
+    ],
+    "body_px": [
+      15,
+      17
+    ]
+  },
+  "chart_patterns": [
+    "annotated-line",
+    "ranked-horizontal-bar",
+    "dot-plot",
+    "small-multiples",
+    "metric-card",
+    "accessible-data-table"
+  ],
+  "interaction_patterns": [
+    "global-filters",
+    "cross-filter",
+    "reset",
+    "scroll-scene",
+    "table-drilldown"
+  ],
+  "responsive_rules": [
+    "12-column desktop grid",
+    "single column mobile",
+    "sticky graphic becomes stacked graphic and step text",
+    "direct labels remain readable"
+  ],
+  "implementation": {
+    "base": "React/Next.js + Tailwind CSS",
+    "custom_svg": "D3.js / visx",
+    "standard_bi": "ECharts",
+    "tables": "TanStack Table / AntV S2",
+    "scroll": "IntersectionObserver or optional GSAP",
+    "backend": "API + StarRocks aggregated/paginated data"
+  }
+}

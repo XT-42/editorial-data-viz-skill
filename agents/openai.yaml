@@ -1,0 +1,4 @@
+interface:
+  display_name: "中文编辑式数据可视化"
+  short_description: "用可扩展模板设计高质量中文数据分析网页与交互式图表"
+  default_prompt: "使用 $editorial-data-viz，按 T001 模板设计一个中文零售经营分析页面，给出可视化、叙事与交互方案。"
