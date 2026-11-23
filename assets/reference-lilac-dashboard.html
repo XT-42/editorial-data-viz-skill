@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Studio Lilac · 专业图形参考实验室 | Editorial Data Viz v1.3</title>
+<style>
+:root{--canvas:#E8E6EF;--surface:#F4F3F8;--ink:#121116;--grid:#CFCBD9;--muted:#47474C;--violet:#7C63FF;--violet-soft:#B9ABFB;--red:#E2492C;--salmon:#F2A391;--magenta:#C04BD9}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--canvas);color:var(--ink);font:14px/1.55 Arial,"Noto Sans SC","Microsoft YaHei",sans-serif}
+main{max-width:1260px;margin:auto;padding:0 28px 60px}h1{font-size:clamp(28px,4.4vw,56px);line-height:1.12;font-weight:700;letter-spacing:-.04em;max-width:1000px;margin:25px 0 15px}
+h2{font-size:22px;margin:0;font-weight:650}.eyebrow{font:700 11px/1.6 Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+p{margin:8px 0 14px;max-width:900px}.small,.sub{font-size:12px;color:var(--muted)}
+header{padding:24px 0 34px;border-bottom:1px solid var(--ink)}header .top{display:flex;justify-content:space-between;gap:12px}
+nav{display:flex;gap:14px;flex-wrap:wrap;margin-top:25px}nav a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink);font-size:12px}
+.section{padding:35px 0 45px;border-bottom:1px solid #918F9B;scroll-margin-top:20px}.head{display:flex;align-items:start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.head h2{margin:7px 0 5px}.head p{max-width:570px}.controls{display:flex;gap:0;flex-wrap:wrap;align-items:center}
+.controls button{background:transparent;border:1px solid var(--ink);border-radius:0;padding:8px 15px;min-height:34px;color:var(--ink);margin-right:-1px;font:inherit;font-size:12px;cursor:pointer}
+.controls button[aria-pressed="true"],.controls button.is-active{background:var(--ink);color:#fff;font-weight:700}
+button:focus-visible,summary:focus-visible,.figure-wrap [tabindex]:focus-visible{outline:2px solid var(--violet);outline-offset:3px}
+.controls button:hover:not([aria-pressed="true"]){background:var(--surface)}
+.plot{margin-top:14px}.figure-wrap{position:relative;overflow:visible;max-width:100%}.figure-wrap svg{display:block;width:100%;max-width:100%;height:auto;overflow:visible}
+.plot svg text{font-family:Arial,"Noto Sans SC","Microsoft YaHei",sans-serif}
+.data-summary{margin-top:9px;font-size:12px;color:var(--muted)}
+.under{margin-top:15px;display:flex;justify-content:space-between;align-items:start;gap:15px;flex-wrap:wrap}
+details{font-size:12px;min-width:210px;max-width:100%}summary{cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+table{border-collapse:collapse;margin-top:12px;min-width:440px;font-size:12px;width:100%}table caption{text-align:left;padding:6px 0}
+td,th{padding:7px 8px;text-align:left;border-bottom:1px solid #B4AFBD}
+.tablewrap{overflow:auto;max-width:100%}
+.tooltip{position:absolute;z-index:4;top:0;left:0;max-width:min(290px,92vw);border:1px solid var(--ink);background:var(--surface);color:var(--ink);padding:12px 15px;font-size:12px;line-height:1.5;pointer-events:none;display:none}
+.tooltip strong{display:block;font-size:21px;margin:3px 0 4px}.tooltip span{color:var(--muted)}
+.series{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.series button{display:inline-flex;gap:7px;align-items:center;border:1px solid var(--ink);padding:6px 9px;cursor:pointer;background:transparent;font-size:12px;border-radius:0}
+.series button[aria-pressed="false"]{opacity:.42;text-decoration:line-through}
+.swatch{width:10px;height:10px;display:inline-block;flex-shrink:0}
+.stack-layout{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:30px;margin-top:16px}
+.stack-plot{min-width:0}.scene-steps{display:flex;flex-direction:column;gap:12px}.scene{border-left:2px solid var(--grid);padding:13px 13px 13px 15px;min-height:150px;opacity:.65}
+.scene.active{border-color:var(--violet);opacity:1}.scene h3{font-size:15px;margin:6px 0}.scene p{font-size:12px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;margin-top:8px;align-items:center}
+.legenditem{display:flex;align-items:center;gap:6px}
+.legend-marker{display:inline-block;width:11px;height:11px}
+.kicker{background:var(--ink);color:white;font-size:11px;font-weight:700;padding:4px 7px;display:inline-block}
+aside.note{font-size:12px;margin:10px 0;color:var(--muted)}
+footer{padding-top:35px;font-size:12px;color:var(--muted)}
+@media(max-width:840px){.stack-layout{grid-template-columns:1fr}.scene-steps{flex-direction:row;overflow:auto}.scene{min-width:220px;min-height:unset}.head{display:block}.controls{margin-top:12px}}
+@media(max-width:590px){main{padding:0 13px 40px}h1{font-size:29px}.section{padding:24px 0 32px}.controls button{padding:7px 9px;font-size:11px}.data-summary{font-size:11px}.plot{overflow-x:auto}.figure-wrap{min-width:590px}.stack-layout .figure-wrap{min-width:590px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+</style></head><body><main>
+<header><div class="top"><span class="eyebrow">EDITORIAL / DATA VISUALIZATION</span><span class="eyebrow">REFERENCE-DRIVEN / V1.3</span></div>
+<h1>专业的图表，不止于图形本身。</h1>
+<p>参考四张用户提供的真实设计截图构建的中文交互样例：从精确颜色、数据编码、注释位置，到按钮状态、估计值斜纹与跨期差额。所有代码为原创独立实现。</p>
+<p class="small">观察范围仅限上传的四张截图；未取得原网页的 DOM、CSS 或源码。部分示例数值为明确标注的模拟数据。</p>
+<nav><a href="#unit">01 / 单位方阵</a><a href="#likert">02 / 情绪发散条</a><a href="#stacked">03 / 堆积滚动叙事</a><a href="#dumbbell">04 / 哑铃比较</a></nav>
+</header>
+<section class="section" id="unit"><div class="head"><div><span class="eyebrow">01 / ONE MARK PER RECORD</span><h2>单位方阵 · 每个方块是一条样本记录</h2><p class="sub">使用分组色与整数 mark 表达样本分布，组内同时标注人数与总占比。</p></div>
+<div class="controls" id="matrix-tabs" aria-label="单位方阵分组维度"><button aria-pressed="false" data-view="All">All</button><button aria-pressed="true" data-view="Region">Region</button><button aria-pressed="false" data-view="Tier">Tier</button><button aria-pressed="false" data-view="Segment">Segment</button></div></div>
+<div class="plot"><div class="figure-wrap" id="unit-wrap"><svg id="unit-svg" viewBox="0 0 950 390" role="img" aria-label="样本单位方阵，每个方块代表一条记录"></svg><div class="tooltip" id="matrix-tip"></div></div></div>
+<div class="under"><span class="data-summary" id="matrix-summary" aria-live="polite"></span><details><summary>查看分组数据表</summary><div class="tablewrap"><table id="matrix-table"><caption>单位方阵分组统计</caption><thead><tr><th>分组</th><th>样本数</th><th>份额</th></tr></thead><tbody></tbody></table></div></details></div></section>
+<section class="section" id="likert"><div class="head"><div><span class="eyebrow">02 / CENTERED NEUTRAL</span><h2>五级 Likert · 中立轴两侧的态度分布</h2><p class="sub">负向和正向围绕中性段中心对齐；两侧净比例直接标注。</p></div>
+<div class="controls" id="likert-tabs" aria-label="情绪条排序"><button data-order="original" aria-pressed="true">Original order</button><button data-order="agreement" aria-pressed="false">Sort by agreement</button></div></div>
+<div class="legend"><span class="legenditem"><i class="legend-marker" style="background:#E2492C"></i>非常不同意</span><span class="legenditem"><i class="legend-marker" style="background:#F2A391"></i>不同意</span><span class="legenditem"><i class="legend-marker" style="background:#CFCBD9"></i>中立</span><span class="legenditem"><i class="legend-marker" style="background:#B9ABFB"></i>同意</span><span class="legenditem"><i class="legend-marker" style="background:#7C63FF"></i>非常同意</span></div>
+<div class="plot"><div class="figure-wrap" id="likert-wrap"><svg id="likert-svg" viewBox="0 0 1000 470" role="img" aria-label="五级态度分布，负向在左、正向在右"></svg><div class="tooltip" id="likert-tip"></div></div></div>
+<div class="under"><span class="data-summary" id="likert-summary" aria-live="polite"></span><details><summary>查看五级态度数据</summary><div class="tablewrap"><table id="likert-table"><caption>五级态度百分比，原始示意数据</caption><thead><tr><th>陈述</th><th>强烈反对</th><th>反对</th><th>中立</th><th>同意</th><th>强烈同意</th><th>净同意</th></tr></thead><tbody></tbody></table></div></details></div></section>
+<section class="section" id="stacked"><div class="head"><div><span class="eyebrow">03 / PERIOD + COMPONENTS + ESTIMATE</span><h2>堆积柱图 · 总量、占比与估计值</h2><p class="sub">不同系列可独立隐藏，纵轴随“绝对值 / 占比”切换；估计年度使用斜纹编码。</p></div><div class="controls" id="stacked-tabs"><button data-mode="absolute" aria-pressed="true">Absolute</button><button data-mode="share" aria-pressed="false">Share of total</button></div></div>
+<div class="series" id="series-controls" aria-label="切换堆积系列"></div>
+<div class="stack-layout"><div class="stack-plot"><div class="figure-wrap" id="stack-wrap"><svg id="stack-svg" viewBox="0 0 760 470" role="img" aria-label="2019至2026年堆积柱形图，2026年为估计值"></svg><div class="tooltip" id="stack-tip"></div></div>
+<div class="under"><span class="data-summary" id="stack-summary" aria-live="polite"></span><details><summary>查看年度组成数据</summary><div class="tablewrap"><table id="stack-table"><caption>年度类别金额（单位：十亿美元），2026e 为估计值</caption><thead><tr><th>年份</th><th>核心平台</th><th>云基础设施</th><th>分析工具</th><th>AI工作流</th><th>合计</th></tr></thead><tbody></tbody></table></div></details></div></div>
+<div class="scene-steps" id="scenes" aria-label="滚动叙事章节"><div class="scene active" data-scene="0"><span class="eyebrow">STORY 01</span><h3>先看长期总量</h3><p>从 2019 年开始比较增长路径，显示上方的总额直标。</p></div>
+<div class="scene" data-scene="1"><span class="eyebrow">STORY 02</span><h3>再看结构变化</h3><p>切换占比，与 absolute 的比较区分“份额”与“规模”。</p></div>
+<div class="scene" data-scene="2"><span class="eyebrow">STORY 03</span><h3>识别未来估计</h3><p>2026e 使用斜线纹理，即使颜色相同也不与历史实际值混淆。</p></div>
+<button id="follow-reset" aria-label="解除手动选择，恢复滚动跟随">恢复滚动聚焦</button>
+</div></div></section>
+<section class="section" id="dumbbell"><div class="head"><div><span class="eyebrow">04 / SHARED SCALE + DELTA IN PP</span><h2>两期哑铃图 · 变化以百分点表示</h2><p class="sub">2024 年空心黑边点，2026 年紫色实心点；统一 0–75% 坐标，右侧显示 ±pp 差额。</p></div>
+<div class="controls" id="dumbbell-tabs" aria-label="哑铃图排序"><button data-sort="after" aria-pressed="true">By 2026</button><button data-sort="change" aria-pressed="false">By change</button><button data-sort="before" aria-pressed="false">By 2024</button></div></div>
+<div class="legend"><span class="legenditem"><i class="legend-marker" style="border:2px solid #121116;border-radius:100%;background:#E8E6EF"></i>2024</span><span class="legenditem"><i class="legend-marker" style="border-radius:100%;background:#7C63FF"></i>2026</span></div>
+<div class="plot"><div class="figure-wrap" id="dumb-wrap"><svg id="dumb-svg" viewBox="0 0 1000 565" role="img" aria-label="2024与2026采用率哑铃比较图"></svg><div class="tooltip" id="dumb-tip"></div></div></div>
+<div class="under"><span class="data-summary" id="dumb-summary" aria-live="polite">数值单位为百分比，差额单位为 pp（百分点）</span><details><summary>查看两期数据表</summary><div class="tablewrap"><table id="dumb-table"><caption>采用率变化，单位：% 与 pp</caption><thead><tr><th>举措</th><th>2024</th><th>2026</th><th>差额 pp</th></tr></thead><tbody></tbody></table></div></details></div></section>
+<footer>STUDIO LILAC / VISUAL EVIDENCE SKILL 1.3.0 · 原创 SVG 组件实验室 · 中文可访问表格。没有复制截图像素、第三方源码或品牌图形资源；数值示例并非企业真实经营数据。</footer></main>
+<script>
+(function () {
+"use strict";
+const P={canvas:"#E8E6EF",surface:"#F4F3F8",ink:"#121116",grid:"#CFCBD9",muted:"#47474C",violet:"#7C63FF",violetSoft:"#B9ABFB",red:"#E2492C",salmon:"#F2A391",magenta:"#C04BD9"};
+const $=id=>document.getElementById(id);
+const svgNS="http://www.w3.org/2000/svg";
+function el(tag,attrs,parent,content){const node=document.createElementNS(svgNS,tag);Object.entries(attrs||{}).forEach(([k,v])=>node.setAttribute(k,String(v)));if(content!==undefined)node.textContent=content;if(parent)parent.append(node);return node}
+function text(parent,x,y,str,opt={}){return el("text",Object.assign({x,y,"font-size":opt.size||13,fill:opt.fill||P.ink,"text-anchor":opt.anchor||"start","font-weight":opt.weight||"400"},opt.extra||{}),parent,String(str))}
+function line(parent,x1,y1,x2,y2,stroke=P.grid,w=1,extra={}){return el("line",Object.assign({x1,y1,x2,y2,stroke,"stroke-width":w},extra),parent)}
+function rect(parent,x,y,w,h,fill,extra={}){return el("rect",Object.assign({x,y,width:Math.max(0,w),height:Math.max(0,h),fill},extra),parent)}
+function circ(parent,x,y,r,fill,stroke="none",sw=1,extra={}){return el("circle",Object.assign({cx:x,cy:y,r,fill,stroke,"stroke-width":sw},extra),parent)}
+function clear(svg,description){svg.replaceChildren();el("title",{},svg,description)}
+function htmlRows(table,rows){const tbody=table.querySelector("tbody");tbody.replaceChildren();for(const row of rows){const tr=document.createElement("tr");for(const value of row){const td=document.createElement("td");td.textContent=String(value);tr.append(td)}tbody.append(tr)}}
+function selected(group,attr,value){document.querySelectorAll("#"+group+" button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset[attr]===value)))}
+function formatPct(n){return (100*n).toFixed(1)+"%"}
+function tip(wrapId,tipId,html,event){const tip=$(tipId),wrap=$(wrapId);tip.innerHTML=html;tip.style.display="block";const box=wrap.getBoundingClientRect();let px=event&&event.clientX?event.clientX-box.left:box.width*.5,py=event&&event.clientY?event.clientY-box.top:box.height*.33;let left=Math.max(5,Math.min(px+12,box.width-300));tip.style.left=left+"px";tip.style.top=Math.max(4,py+10)+"px";}
+function hideTip(id){$(id).style.display="none"}
+const DATA={
+ matrix:[["Europe",148,P.violet],["Asia-Pacific",121,P.red],["Americas",87,P.magenta],["Middle East & Africa",56,P.ink]],
+ likert:[
+ ["交互式可视化让复杂数据更容易理解",3,10,17,36,34],
+ ["静态表格已足以满足全部高管汇报需求",20,39,22,15,4],
+ ["各团队已充分统一共享数据结构",8,28,28,21,15],
+ ["未经验证的数据会阻碍自动化决策",6,14,25,31,24],
+ ["公开仪表板应始终提供可访问数据表",3,8,19,34,36]
+ ],
+ stacked:{years:["2019","2020","2021","2022","2023","2024","2025","2026e"],series:[
+ ["核心平台",P.violet,[110,140,242,322,400,470,565,702]],
+ ["云基础设施",P.grid,[104,121,183,259,410,603,782,298]],
+ ["分析工具",P.magenta,[0,0,0,0,0,0,0,541]],
+ ["AI 工作流",P.ink,[0,0,0,0,0,0,0,299]]
+ ]},
+ dumb:[
+ ["工作流自动化",31,62],["实时数据管道",27,51],["供应商风险监控",22,54],["供应链可追溯",18,41],
+ ["自动化合规审计",29,38],["传统报表导出",47,36],["情景压力测试",26,33],["预测性需求规划",6,19]
+ ]};
+const records=[];DATA.matrix.forEach((g,idx)=>{for(let j=0;j<g[1];j++){records.push({id:records.length+1,region:g[0]})}});
+const groupsFor={Region:DATA.matrix.map(r=>({name:r[0],color:r[2],count:r[1]}))};
+let matrixView="Region",likertOrder="original",stackMode="absolute",selectedSeries=new Set([0,1,2,3]),scene=0,yearLock=null,dumbSort="after";
+function matrixGroups(){if(matrixView==="Region")return groupsFor.Region;if(matrixView==="All")return [{name:"All samples",color:P.violet,count:records.length}];
+const labels=matrixView==="Tier"?["Tier 1","Tier 2","Tier 3"]:["Enterprise","Mid-market","SMB"],counts=matrixView==="Tier"?[170,145,97]:[196,128,88],colors=[P.violet,P.magenta,P.ink];return labels.map((name,i)=>({name,count:counts[i],color:colors[i]}))}
+function renderMatrix(){
+selected("matrix-tabs","view",matrixView);
+const svg=$("unit-svg");clear(svg,"单位方阵，412条样本记录，每个矩形对应一条记录");
+const grps=matrixGroups(),total=grps.reduce((s,g)=>s+g.count,0),one=grps.length===1,cols=one?34:16,step=18.5,size=15,perRow=one?0:2;
+const maxRows=one?Math.ceil(total/34):Math.max(Math.ceil(grps[0].count/16),Math.ceil((grps[1]||{count:0}).count/16));
+let rowSpacing=one?0:205;let centers=[0,0];
+grps.forEach((g,i)=>{
+ let col=one?0:i%2,row=one?0:Math.floor(i/2),ox=one?34:col?496:34,oy=one?47:row*rowSpacing+48,span=Math.ceil(g.count/cols);
+ text(svg,ox,oy-12,g.name+" · "+g.count+" ("+(100*g.count/total).toFixed(1)+"%)",{size:16});
+ for(let n=0;n<g.count;n++){let x=ox+(n%cols)*step,y=oy+7+Math.floor(n/cols)*step;
+ const sq=rect(svg,x,y,size,size,g.color);el("title",{},sq,g.name+" · 样本记录 "+(n+1));}
+ centers[i]=span;});
+$("unit-svg").setAttribute("viewBox","0 0 950 "+(one?340:grps.length>2?405:240));
+$("matrix-summary").textContent="共 "+total+" 条记录 · 实际 SVG 方块 "+svg.querySelectorAll("rect").length+" 个 · 按 "+matrixView+" 分组";
+htmlRows($("matrix-table"),grps.map(g=>[g.name,g.count,(100*g.count/total).toFixed(1)+"%"]));
+}
+document.querySelectorAll("#matrix-tabs button").forEach(b=>b.addEventListener("click",()=>{matrixView=b.dataset.view;renderMatrix()}));
+function renderLikert(){
+selected("likert-tabs","order",likertOrder);
+const svg=$("likert-svg");clear(svg,"五级 Likert 发散条，中性段在共同中心轴两侧平均分配");
+let rows=DATA.likert.map((r,i)=>({r,i}));if(likertOrder==="agreement")rows.sort((a,b)=>(b.r[4]+b.r[5])-(a.r[4]+a.r[5])||a.i-b.i);
+const center=520,scale=4.6;
+line(svg,center,53,center,453,P.ink,1.4);
+const colors=[P.red,P.salmon,P.grid,P.violetSoft,P.violet];
+rows.forEach((obj,i)=>{
+ const a=obj.r,baseY=66+i*79,y=baseY+28,bins=a.slice(1),negative=bins[0]+bins[1],positive=bins[3]+bins[4];
+ text(svg,16,baseY,a[0],14);let left=center-(negative+bins[2]/2)*scale;
+ [0,1,2,3,4].forEach((k)=>{let w=bins[k]*scale;rect(svg,left,y,w,23,colors[k]);left+=w});
+ line(svg,center,y-1,center,y+24,P.ink,1.2);
+ const start=center-(negative+bins[2]/2)*scale,end=center+(positive+bins[2]/2)*scale;
+ text(svg,start-8,y+16,negative+"%",12,P.red,"end");text(svg,end+8,y+16,positive+"%",12,P.violet);
+ const hit=rect(svg,Math.max(0,start-65),baseY-11,Math.min(990,end+85)-Math.max(0,start-65),64,"transparent",{"tabindex":0,"role":"button","aria-label":a[0]+"，反对"+negative+"%，同意"+positive+"%，中立"+bins[2]+"%"});
+ const markup="<span>"+a[0]+"</span><strong>同意 "+positive+"% / 反对 "+negative+"%</strong><span>中立 "+bins[2]+"% · 五级合计 100%</span>";
+ hit.addEventListener("pointerenter",ev=>tip("likert-wrap","likert-tip",markup,ev));hit.addEventListener("pointermove",ev=>tip("likert-wrap","likert-tip",markup,ev));hit.addEventListener("pointerleave",()=>hideTip("likert-tip"));
+ hit.addEventListener("focus",()=>tip("likert-wrap","likert-tip",markup));hit.addEventListener("blur",()=>hideTip("likert-tip"));
+});
+htmlRows($("likert-table"),rows.map(({r})=>[r[0],r[1]+"%",r[2]+"%",r[3]+"%",r[4]+"%",r[5]+"%",(r[4]+r[5])+"%"]));
+$("likert-summary").textContent="5 级完整编码 · 中性段中心线对齐 · "+(likertOrder==="original"?"原始顺序":"按同意比例降序");
+}
+document.querySelectorAll("#likert-tabs button").forEach(b=>b.addEventListener("click",()=>{likertOrder=b.dataset.order;renderLikert()}));
+function renderSeries(){
+const root=$("series-controls");root.replaceChildren();
+DATA.stacked.series.forEach((s,i)=>{const b=document.createElement("button");b.setAttribute("aria-pressed",String(selectedSeries.has(i)));b.dataset.index=String(i);const span=document.createElement("span");span.className="swatch";span.style.background=s[1];b.append(span,document.createTextNode(s[0]));b.addEventListener("click",()=>{if(selectedSeries.has(i)&&selectedSeries.size===1)return;selectedSeries.has(i)?selectedSeries.delete(i):selectedSeries.add(i);renderSeries();renderStack()});root.append(b)});
+}
+function pattern(svg,id,color){const defs=svg.querySelector("defs")||el("defs",{},svg);const p=el("pattern",{id,patternUnits:"userSpaceOnUse",width:8,height:8,patternTransform:"rotate(45)"},defs);rect(p,0,0,8,8,color,{"fill-opacity":".30"});line(p,0,0,0,8,color,1.4)}
+function renderStack(){
+selected("stacked-tabs","mode",stackMode);const svg=$("stack-svg");clear(svg,"年度堆积柱图，可切换绝对值与占比，估计年有斜线");
+const data=DATA.stacked;const totals=data.years.map((_,y)=>data.series.reduce((s,v,i)=>s+(selectedSeries.has(i)?v[2][y]:0),0));
+const maxAbs=Math.max(...totals,1),maxDisplay=stackMode==="share"?100:Math.ceil(maxAbs/500)*500;
+const L=85,R=735,top=36,bottom=399,H=bottom-top,W=R-L;
+for(let j=0;j<=4;j++){let value=maxDisplay*j/4,y=bottom-H*j/4;line(svg,L,y,R,y,P.grid,1.2);text(svg,L-9,y+4,stackMode==="share"?value.toFixed(0)+"%":"$"+Math.round(value).toLocaleString()+"bn",12,P.muted,"end")}
+data.years.forEach((year,yi)=>{
+ const x=96+yi*79,barW=53;let running=bottom;
+ data.series.forEach((serie,si)=>{if(!selectedSeries.has(si))return;const val=serie[2][yi],share=totals[yi]>0?val/totals[yi]*100:0,drawn=stackMode==="share"?share:val,h=H*drawn/maxDisplay;
+ if(h<=0)return;const y=running-h;rect(svg,x,y,barW,h,serie[1]);
+ if(year.endsWith("e")){let id="hatch"+yi+"-"+si;pattern(svg,id,year.endsWith("e")?P.ink:serie[1]);rect(svg,x,y,barW,h,"url(#"+id+")",{"fill-opacity":".45"})}
+ running=y;
+ });
+ const shown=stackMode==="share"?totals[yi]>0?"100%":"N/A":totals[yi].toLocaleString(),selectedYear=yearLock||data.years[scene===2?7:scene===1?5:7];
+ text(svg,x+barW/2,Math.max(top-4,running-9),shown,14,P.ink,"middle");
+ text(svg,x+barW/2,422,year,13,year.endsWith("e")?P.violet:P.muted,"middle");
+ if(year.endsWith("e"))text(svg,x+barW/2,439,"estimate",11,P.violet,"middle");
+ if(year===selectedYear)line(svg,x+barW/2,Math.max(top,running-11),x+barW/2,bottom,P.ink,1,{"stroke-dasharray":"3 3"});
+ const hit=rect(svg,x,top,barW,bottom-top,"transparent",{"tabindex":0,"role":"button","aria-label":year+" 合计 "+totals[yi]+" 十亿美元"});
+ const breakdown=data.series.map((s,i)=>s[0]+"："+(selectedSeries.has(i)?s[2][yi].toLocaleString():"已隐藏")).join(" · ");
+ const markup="<span>"+year+(year.endsWith("e")?"（估计）":"")+"</span><strong>"+(stackMode==="share"?"100%":"$"+totals[yi].toLocaleString()+"bn")+"</strong><span>"+breakdown+"</span>";
+ hit.addEventListener("pointerenter",ev=>tip("stack-wrap","stack-tip",markup,ev));hit.addEventListener("pointermove",ev=>tip("stack-wrap","stack-tip",markup,ev));hit.addEventListener("pointerleave",()=>hideTip("stack-tip"));hit.addEventListener("focus",()=>tip("stack-wrap","stack-tip",markup));hit.addEventListener("blur",()=>hideTip("stack-tip"));hit.addEventListener("click",()=>{yearLock=year;renderStack()});
+});
+htmlRows($("stack-table"),data.years.map((year,i)=>[year,...data.series.map(s=>s[2][i]),data.series.reduce((sum,s)=>sum+s[2][i],0)]));
+$("stack-summary").textContent="口径："+(stackMode==="share"?"已选系列合计占比，各年按100%归一化":"金额（十亿美元），仅计已选择系列")+" · 2026e 为模拟估计值"+(yearLock?" · 聚焦 "+yearLock:"");
+}
+document.querySelectorAll("#stacked-tabs button").forEach(b=>b.addEventListener("click",()=>{stackMode=b.dataset.mode;renderStack()}));
+$("follow-reset").addEventListener("click",()=>{yearLock=null;renderStack()});
+if("IntersectionObserver" in window){const io=new IntersectionObserver(entries=>{for(const item of entries){if(item.isIntersecting){scene=Number(item.target.dataset.scene);document.querySelectorAll(".scene").forEach(e=>e.classList.toggle("active",Number(e.dataset.scene)===scene));if(yearLock===null)renderStack()}}},{threshold:.5});document.querySelectorAll(".scene").forEach(e=>io.observe(e))}
+function renderDumb(){
+selected("dumbbell-tabs","sort",dumbSort);const svg=$("dumb-svg");clear(svg,"哑铃跨期图：2024黑色空心圆，2026紫色实心圆，变动以pp计");
+let data=DATA.dumb.map((r,i)=>({r,i}));let idx=dumbSort==="before"?1:dumbSort==="after"?2:3;
+data.sort((a,b)=>{const va=idx===3?a.r[2]-a.r[1]:a.r[idx],vb=idx===3?b.r[2]-b.r[1]:b.r[idx];return vb-va||a.i-b.i});
+const x0=315,dx=7.1,max=75,x=(v)=>x0+v*dx;line(svg,x0,42,x0,510,P.ink,1.5);
+for(let v=0;v<=70;v+=10){const px=x(v);if(v!==0)line(svg,px,42,px,510,P.grid,1.2);text(svg,px,534,v+"%",12,P.muted,"middle")}
+data.forEach(({r},i)=>{let y=72+i*55,delta=r[2]-r[1],xb=x(r[1]),xa=x(r[2]);
+text(svg,16,y+5,r[0],14);line(svg,xb,y,xa,y,P.violet,2.0);
+circ(svg,xb,y,5.7,P.canvas,P.ink,2.2);circ(svg,xa,y,5.7,P.violet,"none");
+text(svg,925,y+5,(delta>0?"+":"")+delta+" pp",14,delta>=0?P.violet:P.red,"end");
+const hit=rect(svg,10,y-24,970,48,"transparent",{"tabindex":0,"role":"button","aria-label":r[0]+": 2024 "+r[1]+"% 到 2026 "+r[2]+"%，变化"+delta+"个百分点"});
+const markup="<span>"+r[0]+"</span><strong>"+r[1]+"% → "+r[2]+"%</strong><span>变化："+(delta>0?"+":"")+delta+" pp（百分点）</span>";
+ hit.addEventListener("pointerenter",ev=>tip("dumb-wrap","dumb-tip",markup,ev));hit.addEventListener("pointermove",ev=>tip("dumb-wrap","dumb-tip",markup,ev));hit.addEventListener("pointerleave",()=>hideTip("dumb-tip"));hit.addEventListener("focus",()=>tip("dumb-wrap","dumb-tip",markup));hit.addEventListener("blur",()=>hideTip("dumb-tip"));
+});
+htmlRows($("dumb-table"),data.map(({r})=>[r[0],r[1]+"%",r[2]+"%",(r[2]-r[1]>0?"+":"")+(r[2]-r[1])+" pp"]));
+}
+document.querySelectorAll("#dumbbell-tabs button").forEach(b=>b.addEventListener("click",()=>{dumbSort=b.dataset.sort;renderDumb()}));
+renderMatrix();renderLikert();renderSeries();renderStack();renderDumb();
+})();
+</script></body></html>

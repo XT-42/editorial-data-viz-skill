@@ -15,9 +15,15 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Set up Node.js for SVG demo syntax checks
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
       - name: Validate base skill
         run: python scripts/validate_skill.py
       - name: Validate think-cell inspired chart module
         run: python scripts/validate_thinkcell.py
+      - name: Validate screenshot-derived visual system
+        run: python scripts/validate_reference_lilac.py
       - name: Check scripts compile
         run: python -m compileall -q scripts

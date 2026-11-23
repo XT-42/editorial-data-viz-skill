@@ -9,13 +9,14 @@
     "SVG 滚动叙事"
   ],
   "status": "active",
-  "evidence_status": "derived-from-conversation",
+  "evidence_status": "reviewed-screenshot",
   "source_url": "https://aistudio.google.com/apps/bundled/interactive-data-dashboard?showPreview=true&showAssistant=true&remix=true",
   "description": "把 SVG 图形、实时筛选、滚动式数据叙事和可访问数据表组合成中文分析体验。",
   "verification_notes": [
     "未直接查看原模板截图或源码",
     "色彩/字体/布局是原创建议，非原网页实测",
-    "v1.1 新增 30 种独立专业图表配方，其中 15 种有原创 SVG 演示；并非原 Google AI Studio 页面实测图表"
+    "v1.1 新增 30 种独立专业图表配方，其中 15 种有原创 SVG 演示；并非原 Google AI Studio 页面实测图表",
+    "v1.3 根据用户提供的4张截图核验图形可见结构、主色值和按钮外观；未验证原网页的JS源码或所有隐藏状态。"
   ],
   "design_pillars": [
     {
@@ -37,6 +38,11 @@
       "id": "accessible-tables",
       "zh": "可访问数据表",
       "goal": "提供图表数值的核验路径"
+    },
+    {
+      "id": "observed-professional-graphics",
+      "zh": "截图核验图形",
+      "goal": "记录单位方阵、五级Likert、堆积柱滚动叙事、2024–2026哑铃图"
     }
   ],
   "tokens": {
@@ -70,7 +76,11 @@
     "dot-plot",
     "small-multiples",
     "metric-card",
-    "accessible-data-table"
+    "accessible-data-table",
+    "unit-matrix",
+    "diverging-likert",
+    "stacked-column-scrollytelling",
+    "paired-dumbbell"
   ],
   "interaction_patterns": [
     "global-filters",
@@ -97,5 +107,25 @@
   "professional_chart_examples": "assets/pro-chart-gallery.html",
   "independent_professional_charts": 30,
   "demonstrated_svg_charts": 15,
-  "verified_original_patterns": []
+  "verified_original_patterns": [
+    "unit-matrix",
+    "diverging-likert",
+    "stacked-column-scrollytelling",
+    "paired-dumbbell"
+  ],
+  "visual_preset_default": "design-languages/reference-lilac/manifest.json",
+  "visual_presets": [
+    {
+      "id": "reference-lilac",
+      "path": "design-languages/reference-lilac/manifest.json",
+      "status": "reviewed-screenshot"
+    },
+    {
+      "id": "original-paper-editorial",
+      "path": "templates/google-ai-studio-interactive-dashboard/template.json#tokens",
+      "status": "original-recommendation"
+    }
+  ],
+  "chart_pattern_contract": "patterns/observed-editorial-charts.json",
+  "chart_gallery": "assets/reference-lilac-dashboard.html"
 }

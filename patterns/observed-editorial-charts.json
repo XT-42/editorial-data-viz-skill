@@ -1,0 +1,192 @@
+{
+  "version": "1.3.0",
+  "authoring_goal": "将四张已上传截图中的可见图形转换成可复现的 UI/数据/交互规则，不止列图名。",
+  "screenshot_provenance": "user-uploaded reference images, described but not redistributed as files",
+  "palette_ref": "design-languages/reference-lilac/manifest.json",
+  "patterns": [
+    {
+      "id": "unit-matrix",
+      "name_zh": "记录单位方阵",
+      "provenance": "reviewed-screenshot",
+      "question": "区域/层级/细分每个样本占比多少？",
+      "minimum_data": [
+        "record_id",
+        "group"
+      ],
+      "geometry": {
+        "shape": "square",
+        "mark_per_record": 1,
+        "within_group_gap_px": 3,
+        "base_square_px": 14,
+        "layout": "groups in two columns at desktop; stacked on mobile",
+        "count_integrity": "sum of visible squares must equal number of filtered records"
+      },
+      "encodings": {
+        "fill": "nominal category",
+        "position": "within-group row/col grid",
+        "caption": "group · count (percent of current total)"
+      },
+      "states": [
+        "All",
+        "Region",
+        "Tier",
+        "Segment"
+      ],
+      "interaction": {
+        "switch": "regroup one underlying sample-record list, don't change underlying count",
+        "hover": "group and count",
+        "keyboard": "buttons and squares with focus labels",
+        "filter": "optional group click updates linked table"
+      },
+      "fall_back": "table listing group, count, share",
+      "screenshot_example": {
+        "counts": {
+          "Europe": 148,
+          "Asia-Pacific": 121,
+          "Americas": 87,
+          "Middle East & Africa": 56
+        },
+        "total": 412
+      },
+      "validation": [
+        "visible marks === count",
+        "sum counts === 412 for screenshot sample",
+        "shares round to 1dp; sum may differ from 100 due rounding"
+      ],
+      "not_heatmap": true
+    },
+    {
+      "id": "diverging-likert",
+      "name_zh": "五级李克特发散条",
+      "provenance": "reviewed-screenshot",
+      "question": "对每条陈述，正负态度哪边占主导？",
+      "minimum_data": [
+        "statement",
+        "strongly_disagree",
+        "disagree",
+        "neutral",
+        "agree",
+        "strongly_agree"
+      ],
+      "geometry": {
+        "center": "center-neutral",
+        "neutral_split": "neutral/2 on each side",
+        "left_extent": "sd + d + n/2",
+        "right_extent": "n/2 + a + sa",
+        "layout": "each row aligned at shared zero attitude axis; left and right total width can vary",
+        "orientation": "left negative / right positive"
+      },
+      "encodings": {
+        "red": "strongly disagree",
+        "salmon": "disagree",
+        "gray": "neutral",
+        "lavender": "agree",
+        "violet": "strongly agree"
+      },
+      "states": [
+        "Original order",
+        "Sort by agreement"
+      ],
+      "interaction": {
+        "sort": "stable by agree+strongly_agree descending",
+        "hover": "statement breakdown and 2 net totals",
+        "keyboard": "focus row data",
+        "center_rule": "vertical reference guide"
+      },
+      "fall_back": "table with each 5-bin percentage",
+      "validation": [
+        "five segments sum 100% per row",
+        "neutral split once, not double count",
+        "negative and positive exclude neutral",
+        "center aligned and left-side stacking reversed visually"
+      ]
+    },
+    {
+      "id": "stacked-column-scrollytelling",
+      "name_zh": "可滚动叙事的堆积柱图",
+      "provenance": "reviewed-screenshot",
+      "question": "年度总额和类别构成如何变化？",
+      "minimum_data": [
+        "year",
+        "category",
+        "value",
+        "is_estimate"
+      ],
+      "geometry": {
+        "x": "year ordinal",
+        "y": "amount or normalized share",
+        "stack": "sum of visible series",
+        "estimate": "diagonal hatch/pattern on estimated-year segments",
+        "grid": "thin horizontal rule",
+        "annotation": "totals directly above bar"
+      },
+      "encodings": {
+        "series": "categorical colors",
+        "height": "value or normalized %",
+        "pattern": "forecast / estimated, never color alone"
+      },
+      "states": [
+        "Absolute",
+        "Share of total",
+        "series toggle",
+        "focused year"
+      ],
+      "interaction": {
+        "filter": "selected series; recompute visible totals",
+        "switch": "absolute amount vs share each selected-year denominator",
+        "scroll": "observer moves focus year but must not reset user filters",
+        "hover": "breakdown tooltip"
+      },
+      "fall_back": "year/category values + totals table",
+      "validation": [
+        "sum of segments equals visible-year total",
+        "normalized visible stacks sum 100%",
+        "forecast hatch remains on toggles",
+        "chart total labels correct for hidden series",
+        "explicit estimated label"
+      ]
+    },
+    {
+      "id": "paired-dumbbell",
+      "name_zh": "2024/2026 跨期哑铃比较",
+      "provenance": "reviewed-screenshot",
+      "question": "各举措两期采用率提升或下降多少百分点？",
+      "minimum_data": [
+        "initiative",
+        "value_before_pct",
+        "value_after_pct"
+      ],
+      "geometry": {
+        "x": "same 0-100% linear scale shared across rows",
+        "y": "initiative",
+        "point_before": "open circle with dark stroke",
+        "point_after": "filled violet circle",
+        "connector": "thin segment connecting before and after, direction independent"
+      },
+      "encodings": {
+        "delta": "after-before in percentage points (pp)",
+        "positive_delta": "violet",
+        "negative_delta": "red",
+        "reference": "dark baseline at x=0 and pale vertical gridlines"
+      },
+      "states": [
+        "By 2026",
+        "By change",
+        "By 2024"
+      ],
+      "interaction": {
+        "sort": "numeric descending by selected sort; stable tie break",
+        "hover": "value_before% → value_after%; Change ±N pp",
+        "keyboard": "focus row shows same tooltip",
+        "range": "always shared axis, no cherry-picked truncated difference"
+      },
+      "fall_back": "initiative, before, after, delta pp table",
+      "validation": [
+        "delta is percentage points, not relative percent",
+        "before open-circle, after solid-circle",
+        "negative delta visually moves left",
+        "labels anchored and not clipped"
+      ]
+    }
+  ]
+}

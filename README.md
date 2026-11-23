@@ -1,8 +1,25 @@
-# 中文编辑式数据可视化 Skill v1.2 · 商业咨询图形系统 + 可扩展模板库
+# 中文编辑式数据可视化 Skill v1.3 · 商业咨询图形系统 + 可扩展模板库
 
 本 Skill 将 Google AI Studio “Interactive Data Dashboard” 所讨论的四个理念——**SVG 图形、实时筛选、滚动叙事、可访问的数据表**——转化为可执行的中文前端设计工作流。
 
-> 重要：T001 是根据**本次对话中提炼的设计理念**建立的原创风格方案，**未验证原网页截图、源码或精确图表种类**。所给颜色、字体、布局是本 Skill 的推荐方案，不代表 Google 官方原始配置。
+> 重要：v1.3 已**根据用户提供的四张截图**核验具体图形类型、可见视觉布局和主色值，但仍**未取得原网站完整源码、DOM、CSS及全部交互状态**。旧版 T001 中的绿色“Paper Editorial”属原创建议；新版截图核验的紫灰色 `reference-lilac` 为 T001 默认预设。
+
+## v1.3 重要更新：四张截图的视觉证据变成可执行设计语言
+
+上一版“只有图表名称、没有学会图形和配色”的问题在这次修正。现在 **T001 默认为 screenshot-driven reference-lilac**（灰紫底、黑字、深紫、橙红、洋红），并增加 **4 个实际具有不同几何编码的 SVG 组件**：
+
+1. [Unit Matrix 单位方阵](patterns/observed-editorial-charts.json)：一个 square = 一条样本记录，分组数量 148/121/87/56，总数 412。
+2. [Diverging Likert 发散情绪条](patterns/observed-editorial-charts.json)：五级色带、中性段中心对齐、正负比例、认同排序。
+3. [Stacked Column Scrollytelling 年度堆积柱](patterns/observed-editorial-charts.json)：历史及预测斜线、总额标签、Absolute/Share 切换、系列过滤、滚动聚焦。
+4. [Paired Dumbbell 哑铃图](patterns/observed-editorial-charts.json)：空心/实心端点、±pp、三种排序、交互提示。
+
+- [视觉令牌 / 颜色与交互](design-languages/reference-lilac/manifest.json)
+- [可运行中文 SVG 页面](assets/reference-lilac-dashboard.html)
+- [模拟数据合同](examples/reference-lilac-demo-data.json)
+- [截图驱动视觉规范](references/14-screenshot-driven-visual-language.md)
+- [质量回归检查](scripts/validate_reference_lilac.py)
+
+**来源边界：** 可见部分根据截图观察，不宣称已核验原 Google AI Studio 网页全部功能；参考图片不包含在公开仓库中，演示图形均为原创代码。
 
 ## v1.2 新增：think-cell 专业商业图形方法论
 
@@ -91,7 +108,7 @@ python scripts/validate_skill.py
 
 ## 演示
 
-直接双击打开 `assets/editorial-demo.html`（编辑式叙事）、`assets/pro-chart-gallery.html`（15 种专业 SVG 图形）或 `assets/thinkcell-chart-gallery.html`（16 种 think-cell 方法论网页图形），无需安装依赖。演示均为原创模拟数据，而非 Google 模板原站复刻。
+推荐先打开 `assets/reference-lilac-dashboard.html` 检查这次的四种截图核验图形；也可打开 `assets/editorial-demo.html`（编辑式叙事）、`assets/pro-chart-gallery.html`（15 种专业 SVG 图形）或 `assets/thinkcell-chart-gallery.html`（16 种 think-cell 方法论网页图形），无需安装依赖。演示均为原创模拟数据，而非 Google 模板原站复刻。
 
 ## 规范与溯源
 

@@ -1,5 +1,5 @@
 {
-  "version": "1.2.0",
+  "version": "1.3.0",
   "default_template_id": "T001",
   "templates": [
     {
@@ -13,7 +13,7 @@
         "SVG 滚动叙事"
       ],
       "status": "active",
-      "evidence_status": "derived-from-conversation",
+      "evidence_status": "reviewed-screenshot",
       "path": "templates/google-ai-studio-interactive-dashboard",
       "source_url": "https://aistudio.google.com/apps/bundled/interactive-data-dashboard?showPreview=true&showAssistant=true&remix=true"
     }
